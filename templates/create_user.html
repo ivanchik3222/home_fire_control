@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+</head>
+<body>
+    <form action="{{ url_for('create_user') }}" method="post">
+        <input type="text" name="full_name" placeholder="full_name">
+        <button type="submit">отправить</button>
+    </form>
+</body>
+</html>
