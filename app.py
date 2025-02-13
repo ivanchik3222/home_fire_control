@@ -1,37 +1,28 @@
-from flask import Flask, jsonify, redirect, render_template, request, url_for, session
+from flask import Flask, flash, jsonify, redirect, render_template, request, url_for, session
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
+
+from db_models import db, User, Order, Admin, Analytics
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SECRET_KEY'] = 'supersecretkey'
-db = SQLAlchemy(app)
 
-# Модель пользователя (Пожарного)
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(150), nullable=False)
-    password_hash = db.Column(db.String(255), nullable=False)
-    orders = db.relationship('Order', backref='inspector', lazy=True)
 
-# Модель администратора
-class Admin(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(150), nullable=False)
-    password_hash = db.Column(db.String(255), nullable=False)
-    orders = db.relationship('Order', backref='admin', lazy=True)
+db.init_app(app)
 
-# Модель Талона (Заказа на проверку)
-class Order(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    inspector_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-    admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False)
-    address = db.Column(db.String(255), nullable=False)
-    visit_time = db.Column(db.DateTime, nullable=False)
-    family_size = db.Column(db.Integer, nullable=False)
-    family_status = db.Column(db.String(100), nullable=True)
-    safety_status = db.Column(db.Boolean, default=False)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "login"
+
+@login_manager.user_loader
+def load_user(user_id):
+    if not user_id or user_id == "None":
+        return None
+    return User.query.get(int(user_id)) or Admin.query.get(int(user_id))
+
 
 @app.route('/')
 def index():
@@ -96,52 +87,68 @@ def get_users():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
     if request.method == 'POST':
         full_name = request.form['full_name']
         password = request.form['password']
         role = request.form['role']
+
+        if User.query.filter_by(full_name=full_name).first() or Admin.query.filter_by(full_name=full_name).first():
+            flash('Пользователь с таким именем уже существует!', 'danger')
+            return redirect(url_for('register'))
+
         password_hash = generate_password_hash(password)
 
         if role == 'user':
             user = User(full_name=full_name, password_hash=password_hash)
             db.session.add(user)
+            login_user(user)
         elif role == 'admin':
             admin = Admin(full_name=full_name, password_hash=password_hash)
             db.session.add(admin)
+            login_user(admin)
         else:
-            return 'Ошибка: неверная роль', 400
-        
+            flash('Ошибка: неверная роль!', 'danger')
+            return redirect(url_for('register'))
+
         db.session.commit()
+        flash('Регистрация успешна!', 'success')
         return redirect(url_for('login'))
+
     return render_template('register.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
     if request.method == 'POST':
         full_name = request.form['full_name']
         password = request.form['password']
-        
+
         user = User.query.filter_by(full_name=full_name).first()
         admin = Admin.query.filter_by(full_name=full_name).first()
-        
+
         if user and check_password_hash(user.password_hash, password):
-            session['user_id'] = user.id
-            session['role'] = 'user'
+            login_user(user)
+            flash('Вход выполнен!', 'success')
             return redirect(url_for('index'))
         elif admin and check_password_hash(admin.password_hash, password):
-            session['admin_id'] = admin.id
-            session['role'] = 'admin'
+            login_user(admin)
+            flash('Вход выполнен!', 'success')
             return redirect(url_for('index'))
         else:
-            return 'Ошибка авторизации!'
-    
+            flash('Ошибка авторизации! Проверьте данные.', 'danger')
+
     return render_template('login.html')
 
 @app.route('/logout')
+@login_required
 def logout():
-    session.pop('user_id', None)
-    session.pop('admin_id', None)
-    session.pop('role', None)
+    logout_user()
+    flash('Вы вышли из системы.', 'info')
     return redirect(url_for('index'))
 
 
