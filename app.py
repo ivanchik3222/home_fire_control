@@ -1,10 +1,11 @@
-from flask import Flask, flash, jsonify, redirect, render_template, request, url_for, session
+from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 
 from db_models import db, User, Order, Admin, Analytics
+from login_manager import register, login, logout
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
@@ -85,71 +86,9 @@ def get_users():
         })
     return jsonify(result)
 
-@app.route('/register', methods=['GET', 'POST'])
-def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-
-    if request.method == 'POST':
-        full_name = request.form['full_name']
-        password = request.form['password']
-        role = request.form['role']
-
-        if User.query.filter_by(full_name=full_name).first() or Admin.query.filter_by(full_name=full_name).first():
-            flash('Пользователь с таким именем уже существует!', 'danger')
-            return redirect(url_for('register'))
-
-        password_hash = generate_password_hash(password)
-
-        if role == 'user':
-            user = User(full_name=full_name, password_hash=password_hash)
-            db.session.add(user)
-            login_user(user)
-        elif role == 'admin':
-            admin = Admin(full_name=full_name, password_hash=password_hash)
-            db.session.add(admin)
-            login_user(admin)
-        else:
-            flash('Ошибка: неверная роль!', 'danger')
-            return redirect(url_for('register'))
-
-        db.session.commit()
-        flash('Регистрация успешна!', 'success')
-        return redirect(url_for('login'))
-
-    return render_template('register.html')
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
-
-    if request.method == 'POST':
-        full_name = request.form['full_name']
-        password = request.form['password']
-
-        user = User.query.filter_by(full_name=full_name).first()
-        admin = Admin.query.filter_by(full_name=full_name).first()
-
-        if user and check_password_hash(user.password_hash, password):
-            login_user(user)
-            flash('Вход выполнен!', 'success')
-            return redirect(url_for('index'))
-        elif admin and check_password_hash(admin.password_hash, password):
-            login_user(admin)
-            flash('Вход выполнен!', 'success')
-            return redirect(url_for('index'))
-        else:
-            flash('Ошибка авторизации! Проверьте данные.', 'danger')
-
-    return render_template('login.html')
-
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    flash('Вы вышли из системы.', 'info')
-    return redirect(url_for('index'))
+app.add_url_rule('/register', view_func=register, methods=['POST', 'GET'])
+app.add_url_rule('/login', view_func=login, methods=['POST', 'GET'])
+app.add_url_rule('/logout', view_func=logout, methods=['GET'])
 
 
 if __name__ == '__main__':

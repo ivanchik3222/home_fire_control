@@ -9,26 +9,60 @@ class User(db.Model, UserMixin):
     full_name = db.Column(db.String(150), nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     login = db.Column(db.String(150), nullable=False)
-    orders = db.relationship('Order', backref='inspector', lazy=True)
-
+    admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=True)
 
 class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(150), nullable=False)
+    login = db.Column(db.String(150), nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
-    orders = db.relationship('Order', backref='admin', lazy=True)
+    full_name = db.Column(db.String(150), nullable=False)
+    region = db.Column(db.String(150))
+    city = db.Column(db.String(150))
+    address = db.Column(db.String(150))
 
-
-class Order(db.Model):
+class Inspection_object(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    inspector_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
-    admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False)
-    address = db.Column(db.String(255), nullable=False)
-    visit_time = db.Column(db.DateTime, nullable=False)
-    family_size = db.Column(db.Integer, nullable=False)
-    family_status = db.Column(db.String(100), nullable=True)
-    safety_status = db.Column(db.Boolean, default=False)
+    address = db.Column(db.String(150), nullable=False)
+    coordinates = db.Column(db.String(150), nullable=False)
+    type = db.Column(db.String(150), nullable=False)
 
+class Inspection_assigment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    object_id = db.Column(db.Integer, db.ForeignKey('inspection_object.id'), nullable=False)
+    admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False)
+    status = db.Column(db.String(150), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+
+class Inspection_ticket(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    assigment_id = db.Column(db.Integer, db.ForeignKey('inspection_assigment.id'), nullable=False)
+    inspection_date = db.Column(db.DateTime, nullable=False)
+    family_size = db.Column(db.Integer, nullable=False)
+    resident_category = db.column(db.String(150), nullable=False)
+    user_id =db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False)
+
+class Inspection_form(db.Model):
+    id = db.Column(db.Integer, prymary_key=True)
+    assigment_id = db.Column(db.Integer, db.ForeignKey('inspection_assigment.id'), nullable=False)
+    answers = db.Column(db.JSON, nullable=False)
+    risk_score = db.Column(db.Float, nullable=False)
+
+class Inspection_result(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    assigment_id = db.Column(db.Integer, db.ForeignKey('inspection_assigment.id'), nullable=False)
+    fire_risk_level = db.Column(db.String(150), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False) 
+
+class Notification(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False)
+    type = db.Column(db.String(150), nullable=False)
+    message = db.Column(db.String(255), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
 
 class Analytics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
