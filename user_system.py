@@ -2,9 +2,21 @@ from flask import Flask, flash, jsonify, redirect, render_template, request, url
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from db_models import db, User, Order, Admin, Analytics
+from db_models import db, User, Admin
+
+from flask import current_app
 
 
+
+
+login_manager = LoginManager()
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    if not user_id or user_id == "None":
+        return None
+    return User.query.get(int(user_id)) or Admin.query.get(int(user_id))
 
 def register():
     if current_user.is_authenticated:
