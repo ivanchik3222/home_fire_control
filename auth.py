@@ -1,22 +1,11 @@
 from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
-from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+from flask_login import LoginManager, login_user, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from db_models import db, User, Admin
 
-from flask import current_app
-
-
-
-
 login_manager = LoginManager()
 
-
-@login_manager.user_loader
-def load_user(user_id):
-    if not user_id or user_id == "None":
-        return None
-    return User.query.get(int(user_id)) or Admin.query.get(int(user_id))
 
 def register():
     if current_user.is_authenticated:
@@ -25,26 +14,23 @@ def register():
     if request.method == 'POST':
         full_name = request.form['full_name']
         password = request.form['password']
-        role = request.form['role']
+        region = request.form['region']
         login = request.form['login']
+        city = request.form['city']
+        address = request.form['address']
 
-        if User.query.filter_by(login=login).first() or Admin.query.filter_by(login=login).first():
+        user = User.query.filter_by(login=login).first()
+        admin = Admin.query.filter_by(login=login).first()
+
+        if user or admin:
             flash('Пользователь с таким логином уже существует!', 'danger')
             return redirect(url_for('register'))
 
         password_hash = generate_password_hash(password)
 
-        if role == 'user':
-            user = User(full_name=full_name, password_hash=password_hash, login = login)
-            db.session.add(user)
-            login_user(user)
-        elif role == 'admin':
-            admin = Admin(full_name=full_name, password_hash=password_hash,)
-            db.session.add(admin)
-            login_user(admin)
-        else:
-            flash('Ошибка: неверная роль!', 'danger')
-            return redirect(url_for('register'))
+        admin = Admin(full_name=full_name, password_hash=password_hash, login=login, region=region, city=city, address=address)
+
+        db.session.add(admin)
 
         db.session.commit()
         flash('Регистрация успешна!', 'success')
@@ -58,11 +44,11 @@ def login():
         return redirect(url_for('index'))
 
     if request.method == 'POST':
-        full_name = request.form['full_name']
+        login = request.form['login']
         password = request.form['password']
 
-        user = User.query.filter_by(full_name=full_name).first()
-        admin = Admin.query.filter_by(full_name=full_name).first()
+        user = User.query.filter_by(login=login).first()
+        admin = Admin.query.filter_by(login=login).first()
 
         if user and check_password_hash(user.password_hash, password):
             login_user(user)

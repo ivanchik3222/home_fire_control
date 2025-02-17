@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     login = db.Column(db.String(150), nullable=False)
     admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=True)
 
-class Admin(db.Model):
+class Admin(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     login = db.Column(db.String(150), nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
