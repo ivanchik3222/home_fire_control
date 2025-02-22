@@ -63,6 +63,7 @@ class Notification(db.Model):
     type = db.Column(db.String(150), nullable=False)
     message = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
+    is_read = db.Column(db.Boolean, default=False, nullable=False)
 
 class Analytics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
