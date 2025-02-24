@@ -1,0 +1,649 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url('../materials/blurry-buildings-skyline\ 1.png') no-repeat center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Навигационная панель */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1160px;
+    height: 50px;
+    background: white;
+    padding: 0 20px;
+    position: absolute;
+    top: 35px; /* Отступ от верхней границы */
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Логотип */
+.logo img {
+    height: 30px;
+}
+
+/* Список навигации */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+
+/* Главный блок */
+.hero {
+    position: absolute;
+    top: 208px; /* Отступ сверху */
+    left: 380px; /* Отступ слева */
+    width: 752px;
+    height: 324px;
+}
+
+/* Заголовок */
+.hero h1 {
+    font-family: SF UI Display;
+    font-weight: 700;
+    font-size: 120px;
+    line-height: 108px;
+    letter-spacing: 0%;
+    color: #FFEA3C;
+}
+
+/* Описание блока */
+.description {
+    position: absolute;
+    top: 15px; /* Отступ сверху */
+    left: 450px; /* Отступ слева */
+    width: 350px;
+    height: 76px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.09px;
+    letter-spacing: -2%;
+    color: white;
+}
+
+/* Жирный текст */
+.description .bold {
+    font-weight: 600;
+}
+
+/* Цветные выделения */
+.description .highlight {
+    font-weight: 600;
+}
+
+.description .highlight.yellow {
+    color: #FFD700;
+}
+
+/* Блок проверки здания */
+.inspection-box {
+    position: absolute;
+    top: 230px; /* Отступ сверху */
+    left: 530px; /* Отступ слева */
+    width: 340px;
+    height: 76px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.09px;
+    letter-spacing: -2%;
+    color: white;
+}
+
+/* Выделенный текст */
+.inspection-box .highlight {
+    font-weight: 600;
+}
+
+.inspection-box .highlight_1 {
+    font-family: SF UI Display;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19.09px;
+    letter-spacing: -2%;
+    color: #FFD700;
+}
+
+/* Блок кнопки */
+.cta-container {
+    position: absolute;
+    top: 42px; /* Отступ сверху */
+    left: -10px; /* Отступ слева */
+    width: 645px;
+    height: 219px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Изображение огнетушителя */
+.cta-image {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+}
+
+/* Кнопка */
+.cta-button {
+    position: absolute;
+    z-index: 2; /* Устанавливаем поверх огнетушителя */
+    width: 355px;
+    height: 60px;
+    left: 65px;
+    top: 85px;
+    background: none;
+    border: none;
+    font-family: "SF UI Display", sans-serif;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 28.8px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+/* Контейнер для изображения здания */
+.building-container {
+    position: absolute;
+    top: 130px; /* Отступ сверху */
+    left: 770px; /* Отступ слева */
+    width: 427px;
+    height: 777px;
+}
+
+/* Изображение здания */
+.building-image {
+    width: 100%;
+    height: auto;
+}
+
+
+/* .clouds {
+    position: absolute;
+    top: 759px; 
+    left: 0;
+    width: 100%;
+    height: 671px;
+    pointer-events: none; 
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 40%, #ffffff 100%);
+}
+
+
+.clouds-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    mix-blend-mode: lighten;
+} */
+
+/* Контейнер заголовка */
+.process-title {
+    position: absolute;
+    top: 1100px; /* Подняли заголовок чуть выше */
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px 30px;
+    background: white;
+    border-radius: 10px;
+}
+
+/* Заголовок */
+.process-title h2 {
+    font-family: "SF UI Display", sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 95.47px;
+    color: #363636;
+    text-align: center;
+    white-space: nowrap; /* Чтобы не переносился на новую строку */
+}
+
+/* Иконки */
+.process-title .icon {
+    width: 60px;
+    height: auto;
+    padding: 5px;
+    background: #FFD700; /* Добавляем жёлтый фон */
+    border-radius: 5px;
+}
+
+/* Белый фон под секцией "Процесс работы" */
+.process-background {
+    position: absolute;
+    top: 1039px; /* Отступ сверху, как в макете */
+    left: 0;
+    width: 100%;
+    height: 894px; /* Высота по макету */
+    background: url('../materials/Rectangle\ 51.png') no-repeat center/cover;
+}
+
+/* Контейнер всех шагов */
+/* Контейнер всех шагов */
+.process-steps {
+    position: absolute;
+    top: 1427px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%; /* Подгон под макет */
+}
+
+/* Отдельный шаг */
+.step {
+    position: absolute;
+    text-align: center;
+}
+
+/* Позиционирование шагов согласно макету */
+.step-1 {
+    width: 183px;
+    height: 147px;
+    left: 150px;
+}
+
+.step-2 {
+    width: 150px;
+    height: 145px;
+    top: 0.1px;
+    left: 450px;
+}
+
+.step-3 {
+    width: 150px;
+    height: 146px;
+    left: 750px;
+}
+
+.step-4 {
+    width: 150px;
+    height: 140px;
+    top: 0.1px;
+    left: 1050px;
+}
+
+.step-5 {
+    width: 147px;
+    height: 140px;
+    left: 1350px;
+}
+
+/* Размеры иконок шагов */
+.step img {
+    width: 100%;
+    height: auto;
+}
+
+/* Текст под шагом */
+.step p {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #363636;
+    width: 100%;
+}
+
+/* Стрелки */
+.step-arrow {
+    position: absolute;
+    width: 83px; /* Фиксированный размер */
+    height: 39px;
+}
+
+/* Позиционирование стрелок согласно макету */
+.arrow-1 {
+    left: 340px;
+    top: 30px;
+}
+
+.arrow-2 {
+    left: 630px;
+    top: 30px;
+}
+
+.arrow-3 {
+    left: 920px;
+    top: 30px;
+}
+
+.arrow-4 {
+    left: 1230px;
+    top: 25px;
+}
+
+#text-1{
+    width: 141;
+    height: 57;
+    top: 1593px;
+    left: 389px;
+    color: #363636;
+    font-family: SF UI Display;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.09px;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+#text-2{
+    width: 152;
+    height: 76;
+    top: 1633px;
+    left: 623px;
+    color: #363636;
+    font-family: SF UI Display;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.09px;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+#text-3{
+    width: 159;
+    height: 57;
+    top: 1593px;
+    left: 859px;
+    color: #363636;
+    font-family: SF UI Display;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.09px;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+#text-4{
+    width: 180;
+    height: 57;
+    top: 1633px;
+    left: 1089px;
+    color: #363636;
+    font-family: SF UI Display;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.09px;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+#text-5{
+    width: 240;
+    height: 76;
+    top: 1593px;
+    left: 1299px;
+    color: #363636;
+    font-family: SF UI Display;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19.09px;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+/* Секция преимуществ */
+.advantages {
+    position: absolute;
+    top: 2100px; /* Чёткое позиционирование по макету */
+    left: 0;
+    width: 100%;
+    height: 100vh; 
+    background: url('../materials/night-campfire-night\ 1.png') no-repeat center/cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 50px; /* Чуть отступ сверху */
+}
+
+/* Контейнер заголовка */
+.advantages-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 844px;
+    height: 95px;
+    background: rgba(0, 0, 0, 0.8); /* Чёрный фон с небольшой прозрачностью */
+    border-radius: 10px;
+    padding: 15px 20px;
+}
+
+/* Текст заголовка */
+.advantages-title h2 {
+    font-family: "SF UI Display", sans-serif;
+    font-size: 80px;
+    font-weight: 700;
+    color: #FFFFFF;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Иконки */
+.advantages-title .icon {
+    width: 80px; /* Чуть увеличил для чёткого соответствия макету */
+    height: auto;
+    padding: 10px;
+    background: #FFD700;
+    border-radius: 5px;
+}
+
+/* Основной контейнер преимуществ */
+.advantages-content {
+    top: 2493px; /* Чёткое позиционирование */
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px 200px;
+    width: 1200px;
+}
+
+/* Общий стиль для каждого преимущества */
+.advantage {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 500px;
+}
+
+/* Огоньки */
+.fire-icon {
+    width: 46px;
+    height: 60px;
+}
+
+/* Текст */
+.advantage p {
+    font-family: "SF UI Display", sans-serif;
+    font-size: 27px;
+    font-weight: 400;
+    color: white;
+    line-height: 1.5;
+}
+
+/* Жирный текст */
+.advantage p .bold {
+    font-weight: 700;
+}
+
+.advantage-1 {
+    position: absolute;
+    top: 200px;
+    left: 570px;
+}
+
+.advantage-2 {
+    position: absolute;
+    top: 200px;
+    left: 1484px;
+}
+
+.advantage-3 {
+    position: absolute;
+    top: 600px;
+    left: 540px;
+}
+
+.advantage-4 {
+    position: absolute;
+    top: 600px;
+    left: 1484px;
+}
+
+/* .clouds {
+    position: absolute;
+    top: -350px; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1920px;
+    height: 671px;
+    overflow: hidden;
+    background: url('../materials/Облака\ 2.png') no-repeat center/cover;
+}
+
+.clouds-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 1; 
+    mix-blend-mode: normal; 
+} */
+
+/* Секция "КОМАНДА" */
+.team {
+    position: relative;
+    top: 3100px; /* Подкорректировано для лучшего расположения */
+    left: 0;
+    width: 100%;
+    height: auto;
+    background: white;
+    text-align: center;
+    padding-top: 50px;
+}
+
+/* Фон облаков */
+.team-background {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    width: 100%;
+    height: 671px;
+    background: url('../materials/Облака 3.png') no-repeat center/cover;
+}
+
+/* Заголовок "КОМАНДА" */
+.team-title {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    font-size: 80px;
+    font-weight: 700;
+    color: #363636;
+    margin-bottom: 50px;
+}
+
+/* Контейнер участников */
+.team-members {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 150px 100px; /* Отступы между карточками */
+}
+
+/* Карточка участника */
+.member {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Стили изображений */
+.member img {
+    width: 100%;
+    height: auto;
+}
+
+/* Текст под фото */
+.member p {
+    font-family: "SF UI Display", sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #363636;
+    margin-top: 10px;
+}
+
+/* Индивидуальное позиционирование */
+.member-frontend {
+    transform: rotate(10deg);
+    position: absolute;
+    top: 80px;
+    left: 480px;
+}
+
+#Artem{
+    font-family: SF UI Display;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 33.41px;
+    letter-spacing: 0%;
+    width: 119;
+    height: 66;
+    top: 3596.82px;
+    left: 739.5px;    
+}
+
+.member-designer {
+    transform: rotate(-15deg);
+    position: absolute;
+    top: 80px;
+    left: 1120px;
+}
+
+.member-backend-1 {
+    transform: rotate(-15deg);
+    position: absolute;
+    top: 380px;
+    left: 480px;
+}
+
+.member-backend-2 {
+    transform: rotate(25deg);
+    position: absolute;
+    top: 380px;
+    left: 1120px;
+}
