@@ -11,7 +11,7 @@ class User(db.Model, UserMixin):
     login = db.Column(db.String(150), nullable=False)
     admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=True)
 
-class Admin(db.Model):
+class Admin(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     login = db.Column(db.String(150), nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
@@ -39,12 +39,12 @@ class Inspection_ticket(db.Model):
     assigment_id = db.Column(db.Integer, db.ForeignKey('inspection_assigment.id'), nullable=False)
     inspection_date = db.Column(db.DateTime, nullable=False)
     family_size = db.Column(db.Integer, nullable=False)
-    resident_category = db.column(db.String(150), nullable=False)
+    resident_category = db.Column(db.String(150), nullable=False)
     user_id =db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     admin_id = db.Column(db.Integer, db.ForeignKey('admin.id'), nullable=False)
 
 class Inspection_form(db.Model):
-    id = db.Column(db.Integer, prymary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     assigment_id = db.Column(db.Integer, db.ForeignKey('inspection_assigment.id'), nullable=False)
     answers = db.Column(db.JSON, nullable=False)
     risk_score = db.Column(db.Float, nullable=False)
@@ -63,6 +63,7 @@ class Notification(db.Model):
     type = db.Column(db.String(150), nullable=False)
     message = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
+    is_read = db.Column(db.Boolean, default=False, nullable=False)
 
 class Analytics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
