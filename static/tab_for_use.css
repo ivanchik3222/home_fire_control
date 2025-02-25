@@ -219,3 +219,33 @@
     border-radius: 10px;
     background: #D9D9D9;
 }
+
+/* Футер */
+.footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #FFEA3C;
+    color: black;
+    text-align: center;
+    padding: 10px 0;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 16px;
+    top: 880px;
+}
+
+/* Контейнер контента футера */
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Подпись "Сделано командой ITshechka" */
+.made-by span {
+    font-weight: 700;
+}
