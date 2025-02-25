@@ -39,7 +39,7 @@ def load_user(user_id):
     
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('table.html')
 
 
 if __name__ == "__main__":

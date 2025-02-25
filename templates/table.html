@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/tab_for_use.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='/table.css') }}">
     <title>Чек-лист</title>
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="../materials/Vector.png" alt="Логотип">
+                <img src="{{ url_for('static', filename='/materials/Vector.png') }}" alt="Логотип">
             </div>
             <ul class="nav-links">
                 <li><a href="main.html">Главная</a></li>
@@ -24,23 +24,23 @@
 
     <!-- Контейнер таблицы -->
     <section class="table-container">
-        <img src="../materials/Union.png" alt="Таблица" class="table-image">
+        <img src="{{ url_for('static', filename='/materials/Union.png') }}" alt="Таблица" class="table-image">
         <span class="table-symbol">№</span>
         <span class="table-header-1">Имя пользователя</span>
         <span class="table-header-2">Кол-во проектов <br>(выполненных)</span>
         <span class="table-header-3">Кол-во проектов <br>(действующих)</span>
         <span class="table-header-4">Занятость</span>
-        <img src="../materials/Rectangle 60.png" alt="Добавить" class="add">
+        <img src="{{ url_for('static', filename='/materials/Rectangle 60.png') }}" alt="Добавить" class="add">
         <span class="add-2">Добавить</span> <!--Тут не спан, а кнопка должна быть. -->
-        <img src="../materials/Rectangle 60.png" alt="Добавить" class="add-3">
-        <img src="../materials/Rectangle 60.png" alt="Добавить" class="add-4">
-        <img src="../materials/Rectangle 60.png" alt="Добавить" class="add-5">
-        <img src="../materials/Rectangle 60.png" alt="Добавить" class="add-6">
-        <img src="../materials/Rectangle 60.png" alt="Добавить" class="add-7">
-        <img src="../materials/Rectangle 60.png" alt="Добавить" class="add-8">
-        <img src="../materials/Rectangle 60.png" alt="Добавить" class="add-9">
-        <img src="../materials/Rectangle 60.png" alt="Добавить" class="add-10">
-        <img src="../materials/Rectangle 60.png" alt="Добавить" class="add-11">
+        <img src="{{ url_for('static', filename='/materials/Rectangle 60.png') }}" alt="Добавить" class="add-3">
+        <img src="{{ url_for('static', filename='/materials/Rectangle 60.png') }}" alt="Добавить" class="add-4">
+        <img src="{{ url_for('static', filename='/materials/Rectangle 60.png') }}" alt="Добавить" class="add-5">
+        <img src="{{ url_for('static', filename='/materials/Rectangle 60.png') }}" alt="Добавить" class="add-6">
+        <img src="{{ url_for('static', filename='/materials/Rectangle 60.png') }}" alt="Добавить" class="add-7">
+        <img src="{{ url_for('static', filename='/materials/Rectangle 60.png') }}" alt="Добавить" class="add-8">
+        <img src="{{ url_for('static', filename='/materials/Rectangle 60.png') }}" alt="Добавить" class="add-9">
+        <img src="{{ url_for('static', filename='/materials/Rectangle 60.png') }}" alt="Добавить" class="add-10">
+        <img src="{{ url_for('static', filename='/materials/Rectangle 60.png') }}" alt="Добавить" class="add-11">
     </section>
     <footer class="footer">
         <div class="footer-content">
