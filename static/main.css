@@ -243,8 +243,19 @@ body {
     background: url('../materials/Rectangle\ 51.png') no-repeat center/cover;
 }
 
-/* Контейнер всех шагов */
-/* Контейнер всех шагов */
+/* Фон облаков */
+.cloud-platform {
+    position: absolute;
+    top: 759px; /* Отступ сверху */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1900.92px;
+    height: 1514px;
+    background: url('../materials/Облачная платформа 1.png') no-repeat center/cover;
+    z-index: -1; /* Чтобы не перекрывал контент */
+}
+
+
 .process-steps {
     position: absolute;
     top: 1427px;
@@ -405,6 +416,22 @@ body {
     line-height: 19.09px;
     letter-spacing: 0%;
     text-align: center;
+}
+
+/* Блок с шлемом */
+.helmet {
+    position: absolute;
+    top: 1600px; /* Отступ сверху */
+    left: 1477px; /* Смещение слева */
+    width: 336.34px;
+    height: 336.34px;
+    transform: rotate(-32deg); /* Поворот */
+}
+
+/* Изображение шлема */
+.helmet img {
+    width: 100%;
+    height: auto;
 }
 
 /* Секция преимуществ */
@@ -646,4 +673,19 @@ body {
     position: absolute;
     top: 380px;
     left: 1120px;
+}
+
+/* Огнетушитель */
+.fire-extinguisher {
+    position: absolute;
+    top: -120px; /* Отступ сверху */
+    width: 645px;
+    height: 219px;
+    transform: rotate(12.86deg); /* Поворот */
+}
+
+/* Изображение огнетушителя */
+.fire-extinguisher img {
+    width: 80%;
+    height: auto;
 }
