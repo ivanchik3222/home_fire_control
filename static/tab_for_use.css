@@ -1,0 +1,221 @@
+/* Навигационная панель */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1160px;
+    height: 50px;
+    background: #FFEA3C;
+    padding: 0 20px;
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Логотип */
+.logo img {
+    height: 30px;
+}
+
+/* Список навигации */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+
+/* Контейнер таблицы */
+.table-container {
+    position: absolute;
+    top: 261px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1160px;
+    height: 573px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* Изображение таблицы */
+.table-image {
+    width: 100%;
+    height: auto;
+}
+
+/* Символ "№" */
+.table-symbol {
+    position: absolute;
+    top: 24px;
+    left: 20px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+/* Заголовок "Имя пользователя" */
+.table-header-1 {
+    position: absolute;
+    top: 24px;
+    left: 150px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    width: 283px;
+}
+
+.table-header-2 {
+    position: absolute;
+    top: 17px;
+    left: 510px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    width: 283px;
+}
+
+.table-header-3 {
+    position: absolute;
+    top: 17px;
+    left: 765px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    width: 283px;
+}
+
+.table-header-4 {
+    position: absolute;
+    top: 24px;
+    left: 1010px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    width: 283px;
+}
+
+.add {
+    position: absolute;
+    top: 75px;
+    left: 963px;
+    width: 194px;
+    height: 46px;
+    border-radius: 10px;
+    background: #D9D9D9;
+}
+
+/* Текст "Добавить" */
+.add-2 {
+    position: absolute;
+    top: 85px;
+    left: 1013px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #FFEA3C;
+}
+
+.add-3 {
+    position: absolute;
+    top: 124px;
+    left: 963px;
+    width: 194px;
+    height: 46px;
+    border-radius: 10px;
+    background: #D9D9D9;
+}
+
+.add-4 {
+    position: absolute;
+    top: 173px;
+    left: 963px;
+    width: 194px;
+    height: 46px;
+    border-radius: 10px;
+    background: #D9D9D9;
+}
+
+.add-5 {
+    position: absolute;
+    top: 223px;
+    left: 963px;
+    width: 194px;
+    height: 46px;
+    border-radius: 10px;
+    background: #D9D9D9;
+}
+
+.add-6 {
+    position: absolute;
+    top: 273px;
+    left: 963px;
+    width: 194px;
+    height: 46px;
+    border-radius: 10px;
+    background: #D9D9D9;
+}
+
+.add-7 {
+    position: absolute;
+    top: 324px;
+    left: 963px;
+    width: 194px;
+    height: 46px;
+    border-radius: 10px;
+    background: #D9D9D9;
+}
+
+.add-8 {
+    position: absolute;
+    top: 373px;
+    left: 963px;
+    width: 194px;
+    height: 46px;
+    border-radius: 10px;
+    background: #D9D9D9;
+}
+
+.add-9 {
+    position: absolute;
+    top: 423px;
+    left: 963px;
+    width: 194px;
+    height: 46px;
+    border-radius: 10px;
+    background: #D9D9D9;
+}
+
+.add-10 {
+    position: absolute;
+    top: 473px;
+    left: 963px;
+    width: 194px;
+    height: 46px;
+    border-radius: 10px;
+    background: #D9D9D9;
+}
+
+.add-11 {
+    position: absolute;
+    top: 523px;
+    left: 963px;
+    width: 194px;
+    height: 46px;
+    border-radius: 10px;
+    background: #D9D9D9;
+}
