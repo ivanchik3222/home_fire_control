@@ -249,3 +249,116 @@
 .made-by span {
     font-weight: 700;
 }
+/*
+МОДАЛЬНОЕ ОКНО
+*/
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    cursor: grab;
+    user-select: none;
+}
+
+/* Заголовок с возможностью перетаскивания */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFEA3C;
+    color: black;
+    padding: 10px;
+    border-radius: 8px 8px 0 0;
+    cursor: move;
+}
+
+.close-button {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Содержимое */
+.modal-content {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.modal-content input {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.modal-content button {
+    background: #FFEA3C;
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.modal-content button:hover {
+    background: #FFEA3C;
+}
+/*Переделанная таблица*/
+
+/* Контейнер для кнопки и таблицы */
+.table-with-button {
+    margin-top: 15%;
+    margin-right: 6%;
+    margin-left: 3%;
+    display: flex;           /* Располагаем элементы по горизонтали */
+    align-items: center; /* Выравниваем по верхнему краю */
+}
+
+/* Стили для кнопки */
+.icon-button {
+    background-color: #ffd900;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    height: 40px; /* Зафиксированная высота, чтобы лучше смотрелось рядом с таблицей */
+    display: flex;
+    align-items: normal;
+    justify-content: center;
+}
+
+.icon-button img {
+    width: 20px;
+    height: 20px;
+}
+
+table {
+    background-color: rgb(39, 39, 39);
+    border-radius: 10px;
+    font-size: larger;
+    border-spacing: 6px;
+    width: 100%;
+}
+
+thead {
+    color: white;
+}
+
+tbody td {
+    background-color: white;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
