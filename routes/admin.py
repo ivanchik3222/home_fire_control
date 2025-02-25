@@ -1,9 +1,14 @@
 import datetime
-from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
+from flask import Flask, flash, jsonify, redirect, render_template, request, url_for, Blueprint
 from flask_login import current_user
 from werkzeug.security import generate_password_hash
 
 from db_models import Inspection_assigment, Inspection_form, Inspection_object, Inspection_result, Inspection_ticket, Notification, db, User, Admin
+
+
+
+admin_bp = Blueprint('admin', __name__)
+
 
 def create_user():
     if not current_user.is_authenticated:
@@ -213,3 +218,19 @@ def send_notification():
 
         flash('Уведомление успешно отправлено', 'success')
         return redirect(url_for('index'))
+    
+
+
+# Создание чего-либо
+admin_bp.add_url_rule('/user/create', view_func=create_user, methods=['POST', 'GET'])
+admin_bp.add_url_rule('/object/create', view_func=create_object, methods=['POST', 'GET'])
+admin_bp.add_url_rule('/assignment/create', view_func=create_assignment, methods=['POST', 'GET'])
+admin_bp.add_url_rule('/notification/send', view_func=send_notification, methods=['POST'])
+
+# Просмотр
+admin_bp.add_url_rule('/user/<int:user_id>/assignments', view_func=assigments_by_user_chek, methods=['GET'])
+admin_bp.add_url_rule('/assigment/<int:assigment_id>/result', view_func=assigment_result, methods=['GET'])
+
+# Изменение
+admin_bp.add_url_rule('/assigment/<int:assigment_id>/edit', view_func=edit_result, methods=['PUT'])
+admin_bp.add_url_rule('/user/<int:user_id>/edit', view_func=edit_user, methods=['PUT'])

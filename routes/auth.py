@@ -1,10 +1,15 @@
-from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
+from flask import Flask, flash, jsonify, redirect, render_template, request, url_for, Blueprint
 from flask_login import LoginManager, login_user, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from db_models import db, User, Admin
 
 login_manager = LoginManager()
+
+
+auth_bp = Blueprint('auth', __name__)
+
+
 
 
 def register():
@@ -34,7 +39,7 @@ def register():
 
         db.session.commit()
         flash('Регистрация успешна!', 'success')
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
 
     return render_template('register.html')
 
@@ -70,3 +75,9 @@ def logout():
     logout_user()
     flash('Вы вышли из системы.', 'info')
     return redirect(url_for('index'))
+
+
+
+auth_bp.add_url_rule('/register', view_func=register, methods=['POST', 'GET'])
+auth_bp.add_url_rule('/login', view_func=login, methods=['POST', 'GET'])
+auth_bp.add_url_rule('/logout', view_func=logout, methods=['GET'])
