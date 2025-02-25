@@ -1,6 +1,10 @@
-from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
+from flask import Flask, flash, jsonify, redirect, render_template, request, url_for, Blueprint
 from flask_login import current_user
 from db_models import db, User, Admin, Analytics, Region_risk_map
+
+
+analytics_bp = Blueprint('analytics', __name__)
+
 
 def get_regions_analytics():
     if not current_user.is_authenticated:
@@ -30,3 +34,8 @@ def get_map_analytics():
     
     map = Region_risk_map.query.all()
     return jsonify(map)
+
+
+
+analytics_bp.add_url_rule('/regions', view_func=get_regions_analytics, methods=['GET'])
+analytics_bp.add_url_rule('/fire_risk_map', view_func=get_map_analytics, methods=['GET'])

@@ -1,6 +1,10 @@
-from flask import Flask, flash, jsonify, redirect, render_template, request, url_for
+from flask import Flask, flash, jsonify, redirect, render_template, request, url_for, Blueprint
 from flask_login import current_user
 from db_models import Inspection_form, Inspection_result, db, User, Admin, Inspection_ticket
+
+
+inspection_bp = Blueprint('inspection', __name__)
+
 
 def create_ticket():
     if not current_user.is_authenticated:
@@ -72,3 +76,10 @@ def create_result():
         db.commit()
 
         return jsonify({"message": "Данные успешно обновлены"}), 200
+    
+
+
+
+inspection_bp.add_url_rule('/ticket/create', view_func=create_ticket, methods=['POST'])
+inspection_bp.add_url_rule('/form/create', view_func=create_form, methods=['POST'])
+inspection_bp.add_url_rule('/result/create', view_func=create_result, methods=['POST'])
