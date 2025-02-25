@@ -5,11 +5,15 @@
 }
 
 body {
-    background: url('../materials/blurry-buildings-skyline\ 1.png') no-repeat center/cover;
+    background: url("/static/materials/burry.png") no-repeat center center;
+    background-size: cover;
+    width: 100%;
     height: 100vh;
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    margin: 0;
+    padding: 0;
 }
 
 /* Навигационная панель */
@@ -147,12 +151,14 @@ body {
 
 /* Кнопка */
 .cta-button {
+    text-align: left;
+    text-decoration: none;
     position: absolute;
     z-index: 2; /* Устанавливаем поверх огнетушителя */
     width: 355px;
     height: 60px;
     left: 65px;
-    top: 85px;
+    top: 45%;
     background: none;
     border: none;
     font-family: "SF UI Display", sans-serif;
@@ -234,13 +240,14 @@ body {
 }
 
 /* Белый фон под секцией "Процесс работы" */
+/* Фон процесса */
 .process-background {
     position: absolute;
     top: 1039px; /* Отступ сверху, как в макете */
     left: 0;
     width: 100%;
     height: 894px; /* Высота по макету */
-    background: url('../materials/Rectangle\ 51.png') no-repeat center/cover;
+    background: url("/static/materials/Rectangle 51.png") no-repeat center/cover;
 }
 
 /* Фон облаков */
@@ -251,7 +258,7 @@ body {
     transform: translateX(-50%);
     width: 1900.92px;
     height: 1514px;
-    background: url('../materials/Облачная платформа 1.png') no-repeat center/cover;
+    background: url("/static/materials/Облачная платформа 1.png") no-repeat center/cover;
     z-index: -1; /* Чтобы не перекрывал контент */
 }
 
@@ -441,7 +448,7 @@ body {
     left: 0;
     width: 100%;
     height: 100vh; 
-    background: url('../materials/night-campfire-night\ 1.png') no-repeat center/cover;
+    background: url("/static/materials/night-campfire-night 1.png") no-repeat center/cover;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -582,7 +589,7 @@ body {
     left: 0;
     width: 100%;
     height: 671px;
-    background: url('../materials/Облака 3.png') no-repeat center/cover;
+    background: url("/static/materials/Облака 3.png") no-repeat center/cover;
 }
 
 /* Заголовок "КОМАНДА" */

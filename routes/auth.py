@@ -11,7 +11,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'auth.login'
+login_manager.login_view = 'login'
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -49,12 +49,10 @@ def register():
         db.session.add(admin)
         db.session.commit()
         flash('Регистрация успешна!', 'success')
-        return redirect(url_for('auth.login'))
+        return redirect(url_for('admin_login'))
     return render_template('register.html')
 
 def admin_login():
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
     if request.method == 'POST':
         login_val = request.form['login']
         password = request.form['password']
@@ -63,10 +61,10 @@ def admin_login():
         if admin and check_password_hash(admin.password_hash, password):
             login_user(admin)
             flash('Вход выполнен!', 'success')
-            return redirect(url_for('index'))
+            return redirect(url_for('admin.admin_panel'))
         else:
             flash('Ошибка авторизации! Проверьте данные.', 'danger')
-    return render_template('admin_login.html')
+    return render_template('login.html')
 
 def user_login():
     if current_user.is_authenticated:

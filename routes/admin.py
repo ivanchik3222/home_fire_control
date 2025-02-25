@@ -219,7 +219,18 @@ def send_notification():
         flash('Уведомление успешно отправлено', 'success')
         return redirect(url_for('index'))
     
+def admin_panel():
+    if not current_user.is_authenticated:
+        flash('Вы не зарегистрированы', 'danger')
+        return redirect(url_for('index'))
 
+    admin = Admin.query.filter_by(login=current_user.login).first()
+
+    if not admin:
+        flash('Вы не администратор.', 'danger')
+        return redirect(url_for('index'))
+
+    return render_template('table.html')
 
 # Создание чего-либо
 admin_bp.add_url_rule('/user/create', view_func=create_user, methods=['POST', 'GET'])
@@ -228,6 +239,7 @@ admin_bp.add_url_rule('/assignment/create', view_func=create_assignment, methods
 admin_bp.add_url_rule('/notification/send', view_func=send_notification, methods=['POST'])
 
 # Просмотр
+admin_bp.add_url_rule('/main', view_func=admin_panel, methods=['GET'])
 admin_bp.add_url_rule('/user/<int:user_id>/assignments', view_func=assigments_by_user_chek, methods=['GET'])
 admin_bp.add_url_rule('/assigment/<int:assigment_id>/result', view_func=assigment_result, methods=['GET'])
 

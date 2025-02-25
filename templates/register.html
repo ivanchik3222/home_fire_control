@@ -1,56 +1,45 @@
 <!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Регистрация</title>
-    <style>
-        .alert {
-            padding: 10px;
-            margin: 10px;
-            background-color: #f44336;
-            color: white;
-            width: 40%;
-        }
-    </style>
-</head>
-<body>
-    <h2>Регистрация</h2>
-
-    {% with messages = get_flashed_messages(with_categories=True) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
-
-
-    <form method="POST">
-        <label for="full_name">Имя:</label>
-        <input type="text" name="full_name" required>
-        <br>
-
-        <label for="login">Логин:</label>
-        <input type="text" name="login" required>
-        <br>
-
-        <label for="password">Пароль:</label>
-        <input type="password" name="password" required>
-        <br>
-
-        <label for="address">Адрес:</label>
-        <input type="address" name="address" required>
-        <br>
-
-        <label for="city">город:</label>
-        <input type="city" name="city" required>
-        <br>
-
-        <label for="region">регион:</label>
-        <input type="region" name="region" required>
-        <br>
-
-        <button type="submit">Зарегистрироваться</button>
-    </form>
+<html>
+    <head>
+        <link href="{{ url_for('static', filename='/register.css') }}" rel="stylesheet">
+    </head>
+    <body>
+<div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <form method="POST">
+            <h1>Создать аккаунт</h1>
+            <input type="text" name="full_name" placeholder="ФИО" required />
+            <input type="text" name="login" placeholder="Логин" required />
+            <input type="password" name="password" placeholder="Пароль" required />
+            <input type="text" name="address" placeholder="Адрес" required />
+            <input type="text" name="city" placeholder="Город" required />
+            <input type="text" name="region" placeholder="Регион" required />
+            <button type="submit">НАЧАТЬ</button>
+        </form>
+    </div>
+    <div class="form-container sign-in-container">
+        <form method="POST" action="../auth/login">
+            <h1>Войти</h1>
+            <input type="text" name="login" placeholder="Логин" required />
+            <input type="password" name="password" placeholder="Пароль" required />
+            <button type="submit">ПРОДОЛЖИТЬ</button>
+        </form>
+    </div>
+    <div class="overlay-container">
+        <div class="overlay">
+            <div class="overlay-panel overlay-left">
+                <h1>С возвращением!</h1>
+                <p>Предоставьте свой логин и пароль, чтобы продолжить пользоваться нашим сервисом</p>
+                <button class="ghost" id="signIn">Войти</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+                <h1>Здравствуй новобранец!</h1>
+                <p>Введите свои персональные данные для пользования нашей системой</p>
+                <button class="ghost" id="signUp">Регистрация</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='/register.js') }}"></script>
+</div>
 </body>
 </html>
