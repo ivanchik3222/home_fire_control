@@ -47,12 +47,6 @@
     position: relative;
 }
 
-/* Изображение таблицы */
-.table-image {
-    width: 100%;
-    height: auto;
-}
-
 /* Символ "№" */
 .table-symbol {
     position: absolute;
@@ -318,7 +312,7 @@
 
 /* Контейнер для кнопки и таблицы */
 .table-with-button {
-    margin-top: 15%;
+    margin-top: 16%;
     margin-right: auto;
     margin-left: auto;
     padding-right: 40px;
@@ -329,6 +323,7 @@
 
 /* Стили для кнопки */
 .icon-button {
+    margin-bottom: 5%;
     background-color: #ffd900;
     border: none;
     border-radius: 5px;
@@ -384,6 +379,7 @@ tbody td {
     padding: 20px;
     border-radius: 8px;
     width: 600px;
+    height: 350px;
     max-width: 90%;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   }
@@ -430,12 +426,13 @@ tbody td {
   /* Таблица проектов */
   .projects-table_ {
     width: 100%;
-    margin-top: 20px;
-    border-collapse: collapse;
+    border-spacing: 4px;
+    padding-top: 10px;
+    padding-bottom: 3px;
   }
   .projects-table_ th,
   .projects-table_ td {
-    padding: 8px;
+    padding-top: 13px;
     text-align: left;
   }
   /* Навигация по таблице */
@@ -453,4 +450,12 @@ tbody td {
 
 .details-button{
     width: 60px;
+}
+.nav_button_conteiner{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 2%;
+    padding-left: 15px;
+    padding-right: 30px;
 }
