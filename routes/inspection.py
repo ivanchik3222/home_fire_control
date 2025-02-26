@@ -1,6 +1,6 @@
 from flask import Flask, flash, jsonify, redirect, render_template, request, url_for, Blueprint
 from flask_login import current_user
-from db_models import Inspection_form, Inspection_result, db, User, Admin, Inspection_ticket
+from db_models import Inspection_form, Inspection_result, db, User, Admin, Inspection_ticket, Inspection_assigment
 
 
 inspection_bp = Blueprint('inspection', __name__)
@@ -26,6 +26,10 @@ def create_ticket():
         admin_id = current_user.id
 
         ticket = Inspection_ticket(inspection_date=inspection_date, family_size=family_size, resident_category=resident_category, admin_id=admin_id, user_id=user_id, assigment_id=assigment_id)
+
+        assigment = Inspection_assigment.query.filter_by(id=assigment_id).first()
+        assigment.status = "in_progress"
+
         db.session.add(ticket)
         db.session.commit()
 
@@ -77,9 +81,12 @@ def create_result():
 
         return jsonify({"message": "Данные успешно обновлены"}), 200
     
-
+def assigments_by_user_chek(user_id):
+    result_json = Inspection_assigment.query.filter_by(user_id=user_id).first()
+    return jsonify(result_json)
 
 
 inspection_bp.add_url_rule('/ticket/create', view_func=create_ticket, methods=['POST'])
 inspection_bp.add_url_rule('/form/create', view_func=create_form, methods=['POST'])
 inspection_bp.add_url_rule('/result/create', view_func=create_result, methods=['POST'])
+inspection_bp.add_url_rule('/assigment/<int:user_id>', view_func=assigments_by_user_chek, methods=['GET'])
