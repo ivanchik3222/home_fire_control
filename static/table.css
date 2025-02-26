@@ -364,3 +364,93 @@ tbody td {
     padding-bottom: 10px;
     text-align: center;
 }
+/* Добавление всплывающего окна пользователя */
+/* Общие стили */
+.overlay_ {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Модальное окно по центру */
+  .modal_ {
+    position: relative;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 600px;
+    max-width: 90%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  /* Кнопка закрытия */
+  .close-btn_ {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  .close-btn_:hover {
+    color: red;
+  }
+  /* Верхняя часть: фото и данные пользователя */
+  .modal-header_ {
+    display: flex;
+    align-items: center;
+  }
+  /* Фото профиля */
+  .profile-pic_ {
+    width: 120px;
+    height: 160px;
+    object-fit: cover;
+    margin-right: 20px;
+    box-shadow: #ffd900 5px 5px 5px;
+    
+    /*box-shadow: 5px 5px 10px rgba(255, 255, 0, 0.7);*/
+  }
+  .user-info_{
+      display: flex;
+      align-self: start;
+      gap: 20px;
+  }
+  .user-info_ h2 {
+    
+    font-size: 24px;
+  }
+  .user-info_ p {
+    margin-left: 20%;
+  }
+  /* Таблица проектов */
+  .projects-table_ {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+  }
+  .projects-table_ th,
+  .projects-table_ td {
+    padding: 8px;
+    text-align: left;
+  }
+  /* Навигация по таблице */
+  .table-navigation_ {
+    margin-top: 10px;
+    text-align: center;
+  }
+  .table-navigation_ button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0 10px;
+  }
+
+.details-button{
+    width: 60px;
+}

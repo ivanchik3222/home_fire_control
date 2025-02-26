@@ -62,7 +62,7 @@ def admin_login():
         flash('Вход выполнен!', 'success')
         return redirect(url_for('admin.admin_panel'))
     flash('Ошибка авторизации! Проверьте данные.', 'danger')
-    return redirect(url_for('register.html'))
+    return redirect(url_for('auth.register'))
 
 
 def user_login():
