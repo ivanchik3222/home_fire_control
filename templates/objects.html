@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/objects.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='/materials/Vector.png') }}" alt="Логотип">
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Главная</a></li>
+                <li><a href="#">Почему мы?</a></li>
+                <li><a href="#">Как мы работаем?</a></li>
+                <li><a href="#">Наша команда</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Контейнер объекта -->
+    <section class="object-info">
+        <div class="object-photo">
+            <img src="../static/materials/image 4.png" alt="ТРЦ DOSTYQ Mall">
+        </div>
+        <div class="object-details">
+            <h2>ТРЦ "DOSTYQ Mall"</h2>
+            <p style="font-family: SF UI Display;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 28.64px;
+            letter-spacing: -2%;
+            "><strong>Улица Магжана Жумабаева, 91</strong></p> <br>
+            <p style="font-family: SF UI Display;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 28.64px;
+            letter-spacing: -2%;
+            "><strong>ФИО инспектора:<span class="bold" style="font-family: SF UI Display;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 28.64px;
+            letter-spacing: -2%;
+            ">Дибиров Владимир Сидорович</span></p>
+            <p style="font-family: SF UI Display;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 28.64px;
+            letter-spacing: -2%;
+            "><strong>Было проверено инспектором:</strong>26.02.2025</p>
+            <p style="font-family: SF UI Display;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 28.64px;
+            letter-spacing: -2%;"><strong>Статус пожаробезопасности:</strong> <span class="status">Средний</span></p>
+            <p style="font-family: SF UI Display;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 28.64px;
+            letter-spacing: -2%;"><strong>ФИО админа проверки:</strong> <span class="bold">Самолов Радил Дамирович</span></p>
+            <p style="font-family: SF UI Display;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 28.64px;
+            letter-spacing: -2%;"><strong>Талон уведомление:</strong> <span class="bold">№278</span></p>
+            <p style="font-family: SF UI Display;
+            font-weight: 400;
+            font-size: 24px;
+            line-height: 28.64px;
+            letter-spacing: -2%;"><strong>Время проверки:</strong> <span class="bold">2 часа</span></p>
+        </div>
+    </section>
+
+    <div class="object-divider"></div>
+    <p class="fire-safety-title">Адрес</p>
+    <button class="expand-btn">
+        <img src="../static/materials/Group 33.png" alt="Кнопка +">
+    </button>
+    <div class="object-divider-1"></div>
+    <p class="fire-safety-title-1">Тип строения</p>
+    <button class="expand-btn-1">
+        <img src="../static/materials/Group 34.png" alt="Кнопка -">
+    </button>
+    <div class="object-divider-2"></div>
+    <p class="fire-safety-title-2">Дата последний проверки</p>
+    <button class="expand-btn-2">
+        <img src="../static/materials/Group 33.png" alt="Кнопка +">
+    </button>
+    <div class="object-divider-3"></div>
+    <p class="fire-safety-title-3">Периодичность проверки</p>
+    <button class="expand-btn-3">
+        <img src="../static/materials/Group 33.png" alt="Кнопка +">
+    </button>
+    <div class="object-divider-4"></div>
+    <p class="fire-safety-title-4">Имеются огнетушители на каждые 200 кв метров</p>
+    <button class="expand-btn-4">
+        <img src="../static/materials/Group 34.png" alt="Кнопка -">
+    </button>
+    <div class="object-divider-6"></div>
+</body>
+</html>

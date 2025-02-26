@@ -1,0 +1,374 @@
+/* Навигационная панель */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1160px;
+    height: 50px;
+    background: #FFEA3C;
+    padding: 0 20px;
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Логотип */
+.logo img {
+    height: 30px;
+}
+
+/* Список навигации */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+
+/* Контейнер информации об объекте */
+.object-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    position: absolute;
+    top: 230px;
+    left: 380px;
+}
+
+/* Фото объекта */
+.object-photo {
+    width: 400;
+    height: 500;
+    top: 230px;
+    left: 380px;
+    border-radius: 12px;
+    border-width: 10px;
+}
+
+.object-photo img {
+    width: 400;
+    height: 500;
+    top: 230px;
+    left: 380px;
+    border-radius: 12px;
+    border-width: 10px;
+}
+
+/* Блок с текстовой информацией */
+.object-details {
+    width: 568;
+    height: 261;
+    top: 350px;
+    left: 820px;
+    font-family: SF UI Display;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28.64px;
+    letter-spacing: -2%;
+    font-family: SF UI Display;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28.64px;
+    letter-spacing: -2%;
+
+}
+
+/* Заголовок */
+.object-details h2 {
+    font-family: SF UI Display;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 28.64px;
+    letter-spacing: -2%;
+}
+
+/* Подзаголовки */
+.object-details p {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* Выделенный текст */
+.bold {
+    font-weight: 700;
+}
+
+/* Статус пожаробезопасности */
+.status {
+    font-weight: 700;
+    color: #E67E22;
+}
+
+.object-divider {
+    position: absolute;
+    top: 810px;
+    left: 380px;
+    width: 1160px;
+    height: 2px;
+    background: linear-gradient(to right, #FFFFFF, #000000, #000000, #FFFFFF);
+    opacity: 0.5;
+}
+
+/* Заголовок критериев пожарной безопасности */
+.fire-safety-title {
+    position: absolute;
+    top: 811px;
+    left: 380px;
+    width: 633px;
+    height: 29px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28.64px;
+    letter-spacing: -2%;
+    color: #363636;
+}
+
+.object-divider-1 {
+    position: absolute;
+    top: 880px;
+    left: 380px;
+    width: 1160px;
+    height: 2px;
+    background: linear-gradient(to right, #FFFFFF, #000000, #000000, #FFFFFF);
+    opacity: 0.5;
+}
+
+/* Заголовок критериев пожарной безопасности */
+.fire-safety-title-1 {
+    position: absolute;
+    top: 881px;
+    left: 380px;
+    width: 633px;
+    height: 29px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28.64px;
+    letter-spacing: -2%;
+    color: #363636;
+}
+
+.object-divider-2 {
+    position: absolute;
+    top: 950px;
+    left: 380px;
+    width: 1160px;
+    height: 2px;
+    background: linear-gradient(to right, #FFFFFF, #000000, #000000, #FFFFFF);
+    opacity: 0.5;
+}
+
+/* Заголовок критериев пожарной безопасности */
+.fire-safety-title-2 {
+    position: absolute;
+    top: 951px;
+    left: 380px;
+    width: 633px;
+    height: 29px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28.64px;
+    letter-spacing: -2%;
+    color: #363636;
+}
+
+.object-divider-3 {
+    position: absolute;
+    top: 1020px;
+    left: 380px;
+    width: 1160px;
+    height: 2px;
+    background: linear-gradient(to right, #FFFFFF, #000000, #000000, #FFFFFF);
+    opacity: 0.5;
+}
+
+/* Заголовок критериев пожарной безопасности */
+.fire-safety-title-3 {
+    position: absolute;
+    top: 1021px;
+    left: 380px;
+    width: 633px;
+    height: 29px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28.64px;
+    letter-spacing: -2%;
+    color: #363636;
+}
+
+.object-divider-4 {
+    position: absolute;
+    top: 1090px;
+    left: 380px;
+    width: 1160px;
+    height: 2px;
+    background: linear-gradient(to right, #FFFFFF, #000000, #000000, #FFFFFF);
+    opacity: 0.5;
+}
+
+/* Заголовок критериев пожарной безопасности */
+.fire-safety-title-4 {
+    position: absolute;
+    top: 1091px;
+    left: 380px;
+    width: 633px;
+    height: 29px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28.64px;
+    letter-spacing: -2%;
+    color: #363636;
+}
+
+.object-divider-5 {
+    position: absolute;
+    top: 1160px;
+    left: 380px;
+    width: 1160px;
+    height: 2px;
+    background: linear-gradient(to right, #FFFFFF, #000000, #000000, #FFFFFF);
+    opacity: 0.5;
+}
+
+/* Заголовок критериев пожарной безопасности */
+.fire-safety-title-5 {
+    position: absolute;
+    top: 1161px;
+    left: 380px;
+    width: 633px;
+    height: 29px;
+    font-family: "SF UI Display", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 28.64px;
+    letter-spacing: -2%;
+    color: #363636;
+}
+
+.object-divider-6 {
+    position: absolute;
+    top: 1230px;
+    left: 380px;
+    width: 1160px;
+    height: 2px;
+    background: linear-gradient(to right, #FFFFFF, #000000, #000000, #FFFFFF);
+    opacity: 0.5;
+}
+
+/* Кнопка раскрытия */
+.expand-btn {
+    position: absolute;
+    top: 830px;
+    left: 1480px;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #363636;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Изображение внутри кнопки */
+.expand-btn img {
+    width: 200%;
+    height: auto;
+}
+
+.expand-btn-1 {
+    position: absolute;
+    top: 900px;
+    left: 1480px;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #363636;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Изображение внутри кнопки */
+.expand-btn-1 img {
+    width: 200%;
+    height: auto;
+}
+
+.expand-btn-2 {
+    position: absolute;
+    top: 970px;
+    left: 1480px;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #363636;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Изображение внутри кнопки */
+.expand-btn-2 img {
+    width: 200%;
+    height: auto;
+}
+
+.expand-btn-3 {
+    position: absolute;
+    top: 1040px;
+    left: 1480px;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #363636;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Изображение внутри кнопки */
+.expand-btn-3 img {
+    width: 200%;
+    height: auto;
+}
+
+.expand-btn-4 {
+    position: absolute;
+    top: 1110px;
+    left: 1480px;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #363636;
+    background: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Изображение внутри кнопки */
+.expand-btn-4 img {
+    width: 200%;
+    height: auto;
+}
