@@ -43,7 +43,8 @@
                     <td>{{ item.active }}</td>
                     <td>
                         <button class="details-button"
-                        data-user='{"first_name": "{{ item.user.full_name.split()[1] }}",
+                        data-user='{"user_id":"{{ item.user.id }}",
+                                    "first_name": "{{ item.user.full_name.split()[1] }}",
                                     "last_name": "{{ item.user.full_name.split()[0] }}",
                                     "middle_name": "{{ item.user.full_name.split()[2] }}",
                                     "profile_picture": "{{ item.user.profile_picture }}",
@@ -126,7 +127,7 @@
                 <tr>
                   <th>Объект</th>
                   <th>Категория</th>
-                  <th>Дата</th>
+                  <th>Назначить</th>
                 </tr>
               </thead>
               <tbody id="objectsTableBody_">
@@ -151,6 +152,25 @@
                 <button type="submit">Добавить объект</button>
             </form>
         </div>
+        <div class="modal_" id="assignObjectModal_" style="display: none;">
+            <div class="modal-header_">
+              <div>
+                <h2>Назначить объект</h2>
+                <button onclick="backToObjects()">Обратно</button>
+              </div>
+              <span class="close-btn_" id="closeAssignObjectModal_">&times;</span>
+            </div>
+            <form id="assignObjectForm" class="modal-content_">
+              <!-- Скрытые поля для созданния уведомления -->
+              <input type="hidden" id="user_id">
+              <input type="hidden" id="assign_object_id">
+
+              <label for="notification_message">Сообщение уведомления:</label>
+              <input type="text" id="notification_message" required placeholder="Введите сообщение уведомления">
+              
+              <button type="submit">Назначить объект</button>
+            </form>
+          </div>
     </div>
     
     

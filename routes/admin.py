@@ -47,26 +47,24 @@ def create_object():
 
 
 @login_required
-def create_assignment():
-    if not current_user.is_authenticated:
-        flash('Вы не зарегистрированы', 'danger')
-        return redirect(url_for('index'))
+def create_assignment_with_notification():
+    # получаю данные с формы
+    user_id = request.json.get('user_id') # work
+    print(f"ID Пользователя {user_id}")
+    object_id = request.json.get('object_id') # work
+    admin_id = current_user.id
+    message = request.json.get('message', '') # work
+    #
+    date = datetime.datetime.now()
 
-    user_is_not_admin = User.query.filter_by(login=current_user.login).first()
-    if user_is_not_admin:
-        flash('Вы не администратор.', 'danger')
-        return redirect(url_for('index'))
+    assignment = Inspection_assigment(user_id=user_id, object_id=object_id, admin_id=current_user.id, status='pending', created_at=date)
+    notification = Notification(user_id=user_id, admin_id=admin_id, message=message, created_at=date, is_read=False)
+    db.session.add(assignment)
+    db.session.commit()
+    db.session.add(notification)
+    db.session.commit()
+    return jsonify({"message": "Данные успешно обновлены"}), 200
 
-    if request.method == 'POST':
-        user_id = request.form.get('user_id')
-        object_id = request.form.get('object_id')
-        assignment = Inspection_assigment(user_id=user_id, object_id=object_id, admin_id=current_user.id, status="pending")
-        db.session.add(assignment)
-        db.session.commit()
-        flash('Назначение успешно создано!', 'success')
-        return render_template('create_assignment.html')
-
-    return render_template("create_assignment.html")
 
 def assigments_by_user_chek(user_id):
     if not current_user.is_authenticated:
@@ -166,42 +164,15 @@ def edit_user(user_id):
         return redirect(url_for('index'))
         
     return render_template("change_user_data.html")
-
-def send_notification():
-    if not current_user.is_authenticated:
-        flash('Вы не зарегестррированны', 'danger')
-        return redirect(url_for('index'))
     
-    user_is_not_admin = User.query.filter_by(login=current_user.login).first()
 
-    if user_is_not_admin:
-        flash('Вы не администратор.', 'danger')
-        return redirect(url_for('index'))
-
-    if request.method == 'POST':
-        message = request.form['message']
-        user_id = request.form['user_id']
-        type = request.form['type']
-        created_at = datetime.now()
-
-        notification = Notification(user_id=user_id, admin_id=current_user.id, message=message, is_read = False, type=type, created_at=created_at)
-
-        db.session.add(notification)
-        db.session.commit()
-
-        flash('Уведомление успешно отправлено', 'success')
-        return redirect(url_for('index'))
-    
 @login_required
 def admin_panel():
-    if not current_user.is_authenticated:
-        flash('Вы не зарегистрированы', 'danger')
-        return redirect(url_for('index'))
     # Проверяем, что текущий пользователь — администратор
     admin = Admin.query.filter_by(login=current_user.login).first()
     if not admin:
-        flash('Вы не администратор.', 'danger')
-        return redirect(url_for('index'))
+        print('Вы не администратор.', 'danger')
+        return redirect(url_for('auth.register'))
     # Получаем всех пользователей, зарегистрированных этим администратором
     users = User.query.filter_by(admin_id=current_user.id).all()
     data = []
@@ -214,12 +185,14 @@ def admin_panel():
             Inspection_assigment.status.in_(["pending", "in_progress"])
         ).count()
         data.append({
+            "user_id" : user.id,
             "user": user,
             "completed": completed_count,
             "active": active_count
         })
     # Передаем список пользователей с подсчитанными данными в шаблон
     return render_template('table.html', data=data)
+
 @login_required
 def get_objects():
     objects = Inspection_object.query.all()
@@ -235,18 +208,31 @@ def get_objects():
     return jsonify({"objects": objects_list}), 200
 
 
+def get_assignments(user_id):
+    objects = Inspection_assigment.query.all()
+    print(objects)
+    objects_list = [
+        {
+            "name" : Inspection_object.query.filter_by(id=obj.object_id).first().address,
+            "status": obj.status,
+            "date": obj.created_at,
+            "user_id" : obj.user_id
+        } 
+        for obj in objects
+    ]
+    return jsonify(objects_list), 200
+
 # Создание чего-либо
 admin_bp.add_url_rule('/user/create', view_func=create_user, methods=['POST'])
 admin_bp.add_url_rule('/object/create', view_func=create_object, methods=['POST', 'GET'])
-admin_bp.add_url_rule('/assignment/create', view_func=create_assignment, methods=['POST', 'GET'])
-admin_bp.add_url_rule('/notification/send', view_func=send_notification, methods=['POST'])
+admin_bp.add_url_rule('/assignment/create', view_func=create_assignment_with_notification, methods=['POST'])
 
 # Просмотр
 admin_bp.add_url_rule('/main', view_func=admin_panel, methods=['GET'])
 admin_bp.add_url_rule('/user/<int:user_id>/assignments', view_func=assigments_by_user_chek, methods=['GET'])
-admin_bp.add_url_rule('/assigment/<int:assigment_id>/result', view_func=assigment_result, methods=['GET'])
+admin_bp.add_url_rule('/assignment/<int:assigment_id>/result', view_func=assigment_result, methods=['GET'])
 admin_bp.add_url_rule('/objects', view_func=get_objects, methods=['GET'])
-
+admin_bp.add_url_rule('/assignment/<int:user_id>', view_func=get_assignments, methods=['GET'])
 # Изменение
 admin_bp.add_url_rule('/assigment/<int:assigment_id>/edit', view_func=edit_result, methods=['PUT'])
 admin_bp.add_url_rule('/user/<int:user_id>/edit', view_func=edit_user, methods=['PUT'])

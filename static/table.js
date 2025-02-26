@@ -26,7 +26,6 @@ function add_user() {
 
     makeDraggable(modal);
 }
-
 function sendUserData(event) {
     event.preventDefault();
     let full_name = document.getElementById("full_name").value;
@@ -48,7 +47,6 @@ function sendUserData(event) {
     })
     .catch(error => console.error("Ошибка:", error));
 }
-
 // Функция для перетаскивания окна
 function makeDraggable(element) {
     let header = document.querySelector(".modal-header");
@@ -73,28 +71,44 @@ function makeDraggable(element) {
         };
     };
 }
-
 let currentIndex = 0;
 const rowsPerPage = 3;
 let projectsData = [];
 
+updateTable();
+
 function updateTable() {
+    const user_id = document.getElementById("user_id").innerText;
+    console.log(user_id);
+
+    const url = "assignment/" + user_id;
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            projectsData = data; // Сохраняем загруженные данные
+            renderTable(); // Рендерим таблицу после загрузки данных
+        })
+        .catch(error => console.error("Ошибка создания назначения:", error));
+}
+
+function renderTable() {
     const tableBody = document.getElementById("projectsTableBody_");
     tableBody.innerHTML = "";
-    
+
     const visibleProjects = projectsData.slice(currentIndex, currentIndex + rowsPerPage);
-    for (let i = 0; i < rowsPerPage; i++) {
-      let project = visibleProjects[i] || { name: "", status: "", date: "" };
-      let row = `<tr>
-                  <td>${project.name}</td>
-                  <td>${project.status}</td>
-                  <td>${project.date}</td>
-                </tr>`;
-      tableBody.innerHTML += row;
-    }
     
+    visibleProjects.forEach(project => {
+        let row = `<tr>
+                      <td>${project.name || "—"}</td>
+                      <td>${project.status || "—"}</td>
+                      <td>${project.date || "—"}</td>
+                   </tr>`;
+        tableBody.innerHTML += row;
+    });
+
     updateButtons();
-  }
+}
 
 function updateButtons() {
 document.getElementById("prevButton").style.opacity = currentIndex === 0 ? "0.7" : "1";
@@ -124,6 +138,8 @@ button.addEventListener("click", function () {
     document.getElementById("firstName_").innerText = userData.first_name;
     document.getElementById("lastName_").innerText = userData.last_name;
     document.getElementById("middleName_").innerText = userData.middle_name;
+    console.log(userData.user_id)
+    document.getElementById("user_id").innerText = userData.user_id
     
     projectsData = userData.projects;
     currentIndex = 0;
@@ -143,29 +159,50 @@ document.getElementById("userInfo_").style.display = "none";
 let objectIndex = 0;
 const objectsPerPage = 3;
 let objectsData = [];
-
 function updateObjectsTable() {
     const tableBody = document.getElementById("objectsTableBody_");
     tableBody.innerHTML = "";
 
     const visibleObjects = objectsData.slice(objectIndex, objectIndex + objectsPerPage);
     for (let i = 0; i < objectsPerPage; i++) {
-        let object = visibleObjects[i] || { name: "", category: "", date: "" };
+        // Если данных нет, задаём пустые значения
+        let object = visibleObjects[i] || { id: "", address: "", type: "", coordinates: "" };
         let row = `<tr>
-                    <td>${object.name}</td>
-                    <td>${object.category}</td>
-                    <td>${object.date}</td>
+                    <td>${object.address}</td>
+                    <td>${object.type}</td>
+                    <td>
+                      <button class="button_top assign-button"
+                              data-object-id="${object.id}"
+                              data-address="${object.address}"
+                              data-type="${object.type}"
+                              data-coordinates="${object.coordinates}">&rarr;</button>
+                    </td>
                 </tr>`;
         tableBody.innerHTML += row;
     }
-    updateObjectButtons()
+    updateObjectButtons();
+
     function updateObjectButtons() {
         document.getElementById("prevObjectButton").style.opacity = objectIndex === 0 ? "0.5" : "1";
         document.getElementById("prevObjectButton").disabled = objectIndex === 0;
         document.getElementById("nextObjectButton").style.opacity = objectIndex + objectsPerPage >= objectsData.length ? "0.5" : "1";
         document.getElementById("nextObjectButton").disabled = objectIndex + objectsPerPage >= objectsData.length;
     }
+    document.querySelectorAll(".assign-button").forEach(button => {
+        button.addEventListener("click", function () {
+            const objectId = this.dataset.objectId;
+            // Записываем выбранный object_id в скрытое поле формы
+            document.getElementById("assign_object_id").value = objectId;
+            // Дополнительно можно, например, вывести данные объекта в окно (если нужно)
+            // document.getElementById("assignObjectInfo").innerText = `Адрес: ${this.dataset.address}, Тип: ${this.dataset.type}`;
+
+            // Скрываем окно объектов и показываем окно назначения
+            document.getElementById("objectsModal_").style.display = "none";
+            document.getElementById("assignObjectModal_").style.display = "block";
+        });
+    });
 }
+
 document.getElementById("prevObjectButton").addEventListener("click", function () {
 if (objectIndex > 0) {
     objectIndex -= objectsPerPage;
@@ -196,40 +233,23 @@ document.getElementById("viewObjects_").addEventListener("click", function () {
     document.getElementById("modalOverlay_").style.display = "flex";
     document.getElementById("userInfo_").style.display = "none";
 });
-document.getElementById("backToObjects_").addEventListener("click", function () {
+function backToObjects(){
     document.getElementById("addObjectModal_").style.display = "none";
     document.getElementById("objectsModal_").style.display = "block";
     document.getElementById("modalOverlay_").style.display = "flex";
     document.getElementById("userInfo_").style.display = "none";
+    document.getElementById("assignObjectModal_").style.display = "none";
     loadObjects(); // Перезагрузка списка объектов
+}
+document.getElementById("backToObjects_").addEventListener("click", function () {
+    backToObjects()
 });
-
-
-
 
 document.getElementById("addObjectButton_").addEventListener("click", function () {
     document.getElementById("modalOverlay_").style.display = "flex";
     document.getElementById("addObjectModal_").style.display = "block";
     document.getElementById("objectsModal_").style.display = "none";
     document.getElementById("userInfo_").style.display = "none";
-
-    let addObjectModal = document.createElement("div");
-    addObjectModal.classList.add("modal_");
-    addObjectModal.innerHTML = `
-        <div class="modal-header_">
-            <h2>Добавить объект</h2>
-            <span class="close-btn_" id="closeAddObjectModal_">&times;</span>
-        </div>
-        <form class="modal-content_" id="addObjectForm">
-            <label for="object_address">Адрес:</label>
-            <input type="text" id="object_address" required placeholder="Введите адрес">
-            <label for="object_coordinates">Координаты:</label>
-            <input type="text" id="object_coordinates" required placeholder="Введите координаты">
-            <label for="object_type">Тип объекта:</label>
-            <input type="text" id="object_type" required placeholder="Введите тип объекта">
-            <button type="submit">Добавить объект</button>
-        </form>
-    `;
 
     // Обработчик формы добавления объекта
     document.getElementById("addObjectForm").addEventListener("submit", function (event) {
@@ -255,10 +275,53 @@ document.getElementById("addObjectButton_").addEventListener("click", function (
             document.getElementById("objectsModal_").style.display = "block";
             document.getElementById("modalOverlay_").style.display = "flex";
             document.getElementById("userInfo_").style.display = "none";
+            document.getElementById("object_address").value = "";
+            document.getElementById("object_coordinates").value = "";
+            document.getElementById("object_type").value = "";
             loadObjects(); // Обновление списка объектов
         })
         .catch(error => console.error("Ошибка:", error));
     });
+});
+
+document.getElementById("closeAssignObjectModal_").addEventListener("click", function () {
+    document.getElementById("assignObjectModal_").style.display = "none";
+    document.getElementById("objectsModal_").style.display = "none";
+    document.getElementById("modalOverlay_").style.display = "none";
+});
+
+// Обработчик отправки формы назначения
+document.getElementById("assignObjectForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const user_id = document.getElementById("user_id").value;
+    const objectId = document.getElementById("assign_object_id").value;
+    const notificationMessage = document.getElementById("notification_message").value;
+    
+    // Формируем данные для отправки
+    const payload = {
+        user_id: user_id,
+        object_id: objectId,
+        message: notificationMessage
+    };
+    
+    fetch("assignment/create", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload),
+        credentials: "include" // если используется авторизация через Flask-Login
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert(data.message);
+        // Закрываем окно назначения и возвращаем окно со списком объектов
+        document.getElementById("assignObjectModal_").style.display = "none";
+        document.getElementById("objectsModal_").style.display = "block";
+        // Обновляем список объектов, если необходимо
+        loadObjects();
+    })
+    .catch(error => console.error("Ошибка создания назначения:", error));
 });
 
 // Функция для загрузки списка объектов после добавления нового
@@ -271,3 +334,4 @@ function loadObjects() {
         })
         .catch(error => console.error("Ошибка загрузки объектов:", error));
 }
+loadObjects()
