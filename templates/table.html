@@ -61,8 +61,14 @@
             </tbody>
         </table>
     </div>
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025 PyroShield | Все права защищены</p>
+            <p class="made-by">Сделано командой <span>ITshechka</span></p>
+        </div>
+    </footer>
     <div class="overlay_" id="modalOverlay_" style="display: none;">
-        <div class="modal_">
+        <div class="modal_" id="userInfo_" style="display: none;"> 
           <button class="close-btn_" id="closeModal_">&times;</button>
           <div class="modal-header_">
             <img src="" alt="Фото профиля" class="profile-pic_" id="profilePic_">
@@ -79,31 +85,76 @@
               </div>
             </div>
           </div>
+          <div class="nav_button_conteiner">
+            <div>
+              <button id="viewObjects_">Назначить объект</button>
+            </div>
+            <div class="table-navigation_">
+              <button id="prevButton" disabled>&larr;</button>
+              <button id="nextButton">&rarr;</button>
+            </div>
+          </div>
           <table class="projects-table_">
             <thead>
-                <tr>
+              <tr>
                 <th>Проект</th>
                 <th>Статус</th>
                 <th>Дата</th>
-                </tr>
+              </tr>
             </thead>
             <tbody id="projectsTableBody_">
-              <!-- Данные будут загружаться динамически -->
+              <!-- Данные загружаются динамически -->
             </tbody>
           </table>
-          <div class="table-navigation_">
-            <button>&larr;</button>
-            <button>&rarr;</button>
-          </div>
+        </div>
+        <div class="modal_" id="objectsModal_" style="display: none;">
+            <button class="close-btn_" id="closeObjectsModal_">&times;</button>
+            <div class="modal-header_">
+              <h2>Перечень объектов</h2>
+            </div>
+            <div class="nav_button_conteiner">
+              <div>
+                <button id="addObjectButton_">Добавить объект</button>
+              </div>
+              <div class="table-navigation_">
+                <button id="prevObjectButton" disabled>&larr;</button>
+                <button id="nextObjectButton">&rarr;</button>
+              </div>
+            </div>
+            <table class="projects-table_">
+              <thead>
+                <tr>
+                  <th>Объект</th>
+                  <th>Категория</th>
+                  <th>Дата</th>
+                </tr>
+              </thead>
+              <tbody id="objectsTableBody_">
+                <!-- Данные загружаются динамически -->
+              </tbody>
+            </table>
+            <button id="backToUserInfo_">Назад</button>
+        </div>
+        <div class="modal_" id="addObjectModal_" style="display: none;">
+            <div class="modal-header_">
+                <h2>Добавить объект</h2>
+                <span class="close-btn_" id="closeAddObjectModal_">&times;</span>
+                <button id="backToObjects_">Отмена</button>
+            </div>
+            <form class="modal-content_" id="addObjectForm">
+                <label for="object_address">Адрес:</label>
+                <input type="text" id="object_address" required placeholder="Введите адрес">
+                <label for="object_coordinates">Координаты:</label>
+                <input type="text" id="object_coordinates" required placeholder="Введите координаты">
+                <label for="object_type">Тип объекта:</label>
+                <input type="text" id="object_type" required placeholder="Введите тип объекта">
+                <button type="submit">Добавить объект</button>
+            </form>
         </div>
     </div>
     
-    <footer class="footer">
-        <div class="footer-content">
-            <p>© 2025 PyroShield | Все права защищены</p>
-            <p class="made-by">Сделано командой <span>ITshechka</span></p>
-        </div>
-    </footer>
+    
+    
     <script src="{{ url_for('static', filename='table.js') }}"></script>
 </body>
 </html>

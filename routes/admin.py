@@ -35,26 +35,16 @@ def create_user():
 
 @login_required
 def create_object():
-    if not current_user.is_authenticated:
-        flash('Вы не зарегистрированы', 'danger')
-        return redirect(url_for('index'))
+    
+    address = request.form.get('address')
+    coordinates = request.form.get('coordinates')
+    obj_type  = request.form.get('type')
+    obj = Inspection_object(address=address, coordinates=coordinates, type=obj_type)
+    db.session.add(obj)
+    db.session.commit()
+    flash('Объект успешно добавлен!', 'success')
+    return jsonify({"message": "Данные успешно обновлены"}), 200
 
-    user_is_not_admin = User.query.filter_by(login=current_user.login).first()
-    if user_is_not_admin:
-        flash('Вы не администратор.', 'danger')
-        return redirect(url_for('index'))
-
-    if request.method == 'POST':
-        address = request.form.get('address')
-        coordinates = request.form.get('coordinates')
-        obj_type  = request.form.get('type')
-        obj = Inspection_object(address=address, coordinates=coordinates, type=obj_type)
-        db.session.add(obj)
-        db.session.commit()
-        flash('Объект успешно добавлен!', 'success')
-        return render_template('create_object.html')
-
-    return render_template("create_object.html")
 
 @login_required
 def create_assignment():
@@ -230,6 +220,20 @@ def admin_panel():
         })
     # Передаем список пользователей с подсчитанными данными в шаблон
     return render_template('table.html', data=data)
+@login_required
+def get_objects():
+    objects = Inspection_object.query.all()
+    objects_list = [
+        {
+            "id": obj.id,
+            "address": obj.address,
+            "coordinates": obj.coordinates,
+            "type": obj.type
+        } 
+        for obj in objects
+    ]
+    return jsonify({"objects": objects_list}), 200
+
 
 # Создание чего-либо
 admin_bp.add_url_rule('/user/create', view_func=create_user, methods=['POST'])
@@ -241,6 +245,7 @@ admin_bp.add_url_rule('/notification/send', view_func=send_notification, methods
 admin_bp.add_url_rule('/main', view_func=admin_panel, methods=['GET'])
 admin_bp.add_url_rule('/user/<int:user_id>/assignments', view_func=assigments_by_user_chek, methods=['GET'])
 admin_bp.add_url_rule('/assigment/<int:assigment_id>/result', view_func=assigment_result, methods=['GET'])
+admin_bp.add_url_rule('/objects', view_func=get_objects, methods=['GET'])
 
 # Изменение
 admin_bp.add_url_rule('/assigment/<int:assigment_id>/edit', view_func=edit_result, methods=['PUT'])
