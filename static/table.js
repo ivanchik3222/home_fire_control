@@ -79,7 +79,6 @@ updateTable();
 
 function updateTable() {
     const user_id = document.getElementById("user_id").innerText;
-    console.log(user_id);
 
     const url = "assignment/" + user_id;
     fetch(url)
@@ -138,7 +137,6 @@ button.addEventListener("click", function () {
     document.getElementById("firstName_").innerText = userData.first_name;
     document.getElementById("lastName_").innerText = userData.last_name;
     document.getElementById("middleName_").innerText = userData.middle_name;
-    console.log(userData.user_id)
     document.getElementById("user_id").innerText = userData.user_id
     
     projectsData = userData.projects;
@@ -293,7 +291,8 @@ document.getElementById("closeAssignObjectModal_").addEventListener("click", fun
 // Обработчик отправки формы назначения
 document.getElementById("assignObjectForm").addEventListener("submit", function (event) {
     event.preventDefault();
-    const user_id = document.getElementById("user_id").value;
+    const user_id = document.getElementById("user_id").innerText;
+    console.log(user_id)
     const objectId = document.getElementById("assign_object_id").value;
     const notificationMessage = document.getElementById("notification_message").value;
     

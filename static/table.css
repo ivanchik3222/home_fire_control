@@ -427,13 +427,13 @@ tbody td {
   .projects-table_ {
     width: 100%;
     border-spacing: 4px;
-    padding-top: 10px;
     padding-bottom: 3px;
   }
-  .projects-table_ th,
-  .projects-table_ td {
-    padding-top: 13px;
+  .projects-table_ th{
     text-align: left;
+  }
+  .projects-table_ td {
+    text-align: center;
   }
   /* Навигация по таблице */
   .table-navigation_ {
