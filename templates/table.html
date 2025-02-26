@@ -2,16 +2,15 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='/table.css') }}">
-    <title>Чек-лист</title>
+    <title>Панель администратора - Пользователи</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="{{ url_for('static', filename='/materials/Vector.png') }}" alt="Логотип">
+                <img src="{{ url_for('static', filename='materials/Vector.png') }}" alt="Логотип">
             </div>
             <ul class="nav-links">
                 <li><a href="{{ url_for('index') }}">Главная</a></li>
@@ -22,13 +21,11 @@
         </nav>
     </header>
     <div class="table-with-button">
-        <!-- Кнопка с иконкой -->
-         
+        <!-- Кнопка для добавления нового пользователя -->
         <button class="icon-button" onclick="add_user()">
-            <!-- Замените путь на свою иконку -->
-            <img src="{{ url_for('static', filename='/materials/add_person.svg')}}" alt="Добавить" />
+            <img src="{{ url_for('static', filename='materials/add_person.svg') }}" alt="Добавить">
         </button>
-    <!-- Контейнер таблицы -->
+        <!-- Таблица пользователей -->
         <table>
             <thead>
                 <tr>
@@ -39,78 +36,28 @@
                 </tr>
             </thead>
             <tbody>
+                {% for item in data %}
                 <tr>
-                    <td>Иван Петров</td>
-                    <td>5</td>
-                    <td>2</td>
-                    <td>Фулл-тайм</td>
+                    <td>{{ item.user.full_name }}</td>
+                    <td>{{ item.completed }}</td>
+                    <td>{{ item.active }}</td>
+                    <td><a href="{{ url_for('admin.assigments_by_user_chek', user_id=item.user.id) }}">Подробнее</a></td>
                 </tr>
+                {% else %}
                 <tr>
-                
-                    <td>Анна Смирнова</td>
-                    <td>8</td>
-                    <td>3</td>
-                    <td>Частичная</td>
+                    <td colspan="4">Нет зарегистрированных пользователей.</td>
                 </tr>
-                <tr>
-                    <td>Алексей Иванов</td>
-                    <td>4</td>
-                    <td>1</td>
-                    <td>Фриланс</td>
-                </tr>
-                <tr>
-                    <td>Алексей Иванов</td>
-                    <td>4</td>
-                    <td>1</td>
-                    <td>Фриланс</td>
-                </tr>
-                <tr>
-                    <td>Алексей Иванов</td>
-                    <td>4</td>
-                    <td>1</td>
-                    <td>Фриланс</td>
-                </tr>
-                <tr>
-                    <td>Алексей Иванов</td>
-                    <td>4</td>
-                    <td>1</td>
-                    <td>Фриланс</td>
-                </tr>
-                <tr>
-                    <td>Алексей Иванов</td>
-                    <td>4</td>
-                    <td>1</td>
-                    <td>Фриланс</td>
-                </tr>
-                <tr>
-                    <td>Алексей Иванов</td>
-                    <td>4</td>
-                    <td>1</td>
-                    <td>Фриланс</td>
-                </tr>
-                <tr>
-                    <td>Алексей Иванов</td>
-                    <td>4</td>
-                    <td>1</td>
-                    <td>Фриланс</td>
-                </tr>
-                <tr>
-                    <td>Алексей Иванов</td>
-                    <td>4</td>
-                    <td>1</td>
-                    <td>Фриланс</td>
-                </tr>
+                {% endfor %}
             </tbody>
         </table>
-        
     </div>
     <footer class="footer">
         <div class="footer-content">
             <p>© 2025 PyroShield | Все права защищены</p>
             <p class="made-by">Сделано командой <span>ITshechka</span></p>
         </div>
-    </footer>    
-    <script src="{{ url_for('static', filename='/table.js') }}"></script>
+    </footer>
+    <script src="{{ url_for('static', filename='table.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </body>
 </html>

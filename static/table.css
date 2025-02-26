@@ -3,7 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 1160px;
+    width: 80%;
     height: 50px;
     background: #FFEA3C;
     padding: 0 20px;
@@ -319,8 +319,10 @@
 /* Контейнер для кнопки и таблицы */
 .table-with-button {
     margin-top: 15%;
-    margin-right: 6%;
-    margin-left: 3%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 40px;
+    width: 80%;
     display: flex;           /* Располагаем элементы по горизонтали */
     align-items: center; /* Выравниваем по верхнему краю */
 }

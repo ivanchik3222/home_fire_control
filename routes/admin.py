@@ -1,6 +1,6 @@
 import datetime
 from flask import Flask, flash, jsonify, redirect, render_template, request, url_for, Blueprint
-from flask_login import current_user
+from flask_login import current_user, login_required
 from werkzeug.security import generate_password_hash
 
 from db_models import Inspection_assigment, Inspection_form, Inspection_object, Inspection_result, Inspection_ticket, Notification, db, User, Admin
@@ -11,86 +11,69 @@ admin_bp = Blueprint('admin', __name__)
 
 
 def create_user():
-    if not current_user.is_authenticated:
-        flash('Вы не зарегестррированны', 'danger')
-        return redirect(url_for('index'))
+    full_name = request.json['full_name']
+    password = request.json['password']
+    login = request.json['login']
+    admin_id = current_user.id
+
+    user_exist = User.query.filter_by(login=login).first()
+    admin_exist = Admin.query.filter_by(login=login).first()
+
+    if user_exist or admin_exist:
+        flash('Пользователь с таким логином уже существуует', 'danger')
+        return redirect('/admin/user/create')
     
-    user_is_not_admin = User.query.filter_by(login=current_user.login).first()
+    password_hash = generate_password_hash(password)
 
-    if user_is_not_admin:
-        flash('Вы не администратор.', 'danger')
-        return redirect(url_for('index'))
+    user = User(full_name=full_name, password_hash=password_hash, login=login, admin_id=admin_id)
 
+    db.session.add(user)
+    db.session.commit()
+    flash('Регистрация успешна!', 'success')
+    return redirect(url_for('index'))
+    
 
-    if request.method == 'POST':
-        full_name = request.form['full_name']
-        password = request.form['password']
-        login = request.form['login']
-        admin_id = current_user.id
-
-        user_exist = User.query.filter_by(login=login).first()
-        admin_exist = Admin.query.filter_by(login=login).first()
-
-        if user_exist or admin_exist:
-            flash('Пользователь с таким логином уже существуует', 'danger')
-            return redirect('/admin/user/create')
-        
-        password_hash = generate_password_hash(password)
-
-        user = User(full_name=full_name, password_hash=password_hash, login=login, admin_id=admin_id)
-
-        db.session.add(user)
-        db.session.commit()
-        flash('Регистрация успешна!', 'success')
-        return redirect(url_for('index'))
-        
-    return render_template("create_user.html")
-
+@login_required
 def create_object():
     if not current_user.is_authenticated:
-        flash('Вы не зарегестррированны', 'danger')
+        flash('Вы не зарегистрированы', 'danger')
         return redirect(url_for('index'))
-    
-    user_is_not_admin = User.query.filter_by(login=current_user.login).first()
 
+    user_is_not_admin = User.query.filter_by(login=current_user.login).first()
     if user_is_not_admin:
         flash('Вы не администратор.', 'danger')
         return redirect(url_for('index'))
 
     if request.method == 'POST':
         address = request.form.get('address')
-        coordinates  = request.form.get('coordinates')
-        type = request.form.get('type')
-
-        object = Inspection_object(address=address, coordinates=coordinates, type=type)
-
-        db.session.add(object)
+        coordinates = request.form.get('coordinates')
+        obj_type  = request.form.get('type')
+        obj = Inspection_object(address=address, coordinates=coordinates, type=obj_type)
+        db.session.add(obj)
         db.session.commit()
         flash('Объект успешно добавлен!', 'success')
         return render_template('create_object.html')
-    
+
     return render_template("create_object.html")
 
+@login_required
 def create_assignment():
     if not current_user.is_authenticated:
-        flash('Вы не зарегестррированны', 'danger')
+        flash('Вы не зарегистрированы', 'danger')
         return redirect(url_for('index'))
-    
-    user_is_not_admin = User.query.filter_by(login=current_user.login).first()
 
-    if user_is_not_admin:        
+    user_is_not_admin = User.query.filter_by(login=current_user.login).first()
+    if user_is_not_admin:
         flash('Вы не администратор.', 'danger')
         return redirect(url_for('index'))
 
     if request.method == 'POST':
         user_id = request.form.get('user_id')
         object_id = request.form.get('object_id')
-
-        assignment = Inspection_assigment(user_id=user_id, object_id=object_id, admin_id=current_user.id)
-
+        assignment = Inspection_assigment(user_id=user_id, object_id=object_id, admin_id=current_user.id, status="pending")
         db.session.add(assignment)
         db.session.commit()
-        flash('Объект успешно добавлен!', 'success')
+        flash('Назначение успешно создано!', 'success')
         return render_template('create_assignment.html')
 
     return render_template("create_assignment.html")
@@ -219,21 +202,37 @@ def send_notification():
         flash('Уведомление успешно отправлено', 'success')
         return redirect(url_for('index'))
     
+@login_required
 def admin_panel():
     if not current_user.is_authenticated:
         flash('Вы не зарегистрированы', 'danger')
         return redirect(url_for('index'))
-
+    # Проверяем, что текущий пользователь — администратор
     admin = Admin.query.filter_by(login=current_user.login).first()
-
     if not admin:
         flash('Вы не администратор.', 'danger')
         return redirect(url_for('index'))
-
-    return render_template('table.html')
+    # Получаем всех пользователей, зарегистрированных этим администратором
+    users = User.query.filter_by(admin_id=current_user.id).all()
+    data = []
+    for user in users:
+        # Количество выполненных назначений
+        completed_count = Inspection_assigment.query.filter_by(user_id=user.id, status="completed").count()
+        # Количество активных назначений (pending или in_progress)
+        active_count = Inspection_assigment.query.filter(
+            Inspection_assigment.user_id == user.id,
+            Inspection_assigment.status.in_(["pending", "in_progress"])
+        ).count()
+        data.append({
+            "user": user,
+            "completed": completed_count,
+            "active": active_count
+        })
+    # Передаем список пользователей с подсчитанными данными в шаблон
+    return render_template('table.html', data=data)
 
 # Создание чего-либо
-admin_bp.add_url_rule('/user/create', view_func=create_user, methods=['POST', 'GET'])
+admin_bp.add_url_rule('/user/create', view_func=create_user, methods=['POST'])
 admin_bp.add_url_rule('/object/create', view_func=create_object, methods=['POST', 'GET'])
 admin_bp.add_url_rule('/assignment/create', view_func=create_assignment, methods=['POST', 'GET'])
 admin_bp.add_url_rule('/notification/send', view_func=send_notification, methods=['POST'])

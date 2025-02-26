@@ -49,22 +49,21 @@ def register():
         db.session.add(admin)
         db.session.commit()
         flash('Регистрация успешна!', 'success')
-        return redirect(url_for('admin_login'))
+        return render_template('register.html')
     return render_template('register.html')
 
 def admin_login():
-    if request.method == 'POST':
-        login_val = request.form['login']
-        password = request.form['password']
+    login_val = request.form['login']
+    password = request.form['password']
 
-        admin = Admin.query.filter_by(login=login_val).first()
-        if admin and check_password_hash(admin.password_hash, password):
-            login_user(admin)
-            flash('Вход выполнен!', 'success')
-            return redirect(url_for('admin.admin_panel'))
-        else:
-            flash('Ошибка авторизации! Проверьте данные.', 'danger')
-    return render_template('login.html')
+    admin = Admin.query.filter_by(login=login_val).first()
+    if admin and check_password_hash(admin.password_hash, password):
+        login_user(admin)
+        flash('Вход выполнен!', 'success')
+        return redirect(url_for('admin.admin_panel'))
+    flash('Ошибка авторизации! Проверьте данные.', 'danger')
+    return redirect(url_for('register.html'))
+
 
 def user_login():
     if current_user.is_authenticated:
@@ -91,7 +90,7 @@ def logout():
 
 # Регистрация и вход/выход для администратора (используются стандартные маршруты)
 auth_bp.add_url_rule('/register', view_func=register, methods=['GET', 'POST'])
-auth_bp.add_url_rule('/login', view_func=admin_login, methods=['GET', 'POST'])
+auth_bp.add_url_rule('/login', view_func=admin_login, methods=['POST'])
 auth_bp.add_url_rule('/logout', view_func=logout, methods=['GET'])
 
 # Отдельные маршруты для входа/выхода пользователя
