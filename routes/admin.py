@@ -210,7 +210,10 @@ def get_assignments(user_id):
         {
             "name" : Inspection_object.query.filter_by(id=obj.object_id).first().address,
             "status": obj.status,
-            "date": obj.created_at
+            "date": obj.created_at,
+            "coordinates": Inspection_object.query.filter_by(id=obj.object_id).first().coordinates,
+            "object_id":obj.object_id
+
         } 
         for obj in objects
     ]

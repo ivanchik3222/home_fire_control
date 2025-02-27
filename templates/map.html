@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/map.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='/materials/Vector.png') }}" alt="Логотип">
+            </div>
+            <ul class="nav-links">
+                <li><a href="main.html">Главная</a></li>
+                <li><a href="#">Регистрация/авторизация</a></li>
+                <li><a href="#">Профиль</a></li>
+                <li><a href="#">Наша команда</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- Контейнер для карты -->
+    <section class="map-container">
+        <img src="../static/materials/Path.png" alt="Карта с метками" class="map-background">
+        <img src="../static/materials/Vector_1.png" alt="" class="vector-1">
+        <img src="../static/materials/Vector_1.png" alt="" class="vector-2">
+        <img src="../static/materials/Vector_1.png" alt="" class="vector-3">
+        <img src="../static/materials/Vector_1.png" alt="" class="vector-4">
+        <img src="../static/materials/Vector_1.png" alt="" class="button-1">
+        <a href="map-1.html" class="button-2">
+            Перейти на карту
+        </a>
+    </section>
+
+    <script src="../static/map.js"></script>
+</body>
+</html>
