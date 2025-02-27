@@ -40,7 +40,7 @@
                     <th>Подробнее</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody style="color: white;">
                 {% for item in data %}
                 <tr style="font-family: 'SF UI Display', sans-serif;">
                     <td>{{ item.user.full_name }}</td>
@@ -142,26 +142,28 @@
             <button id="backToUserInfo_">Назад</button>
         </div>
         <div class="modal_" id="addObjectModal_" style="display: none;">
-            <div class="modal-header_">
-                <h2>Добавить объект</h2>
-                <span class="close-btn_" id="closeAddObjectModal_">&times;</span>
-                <button id="backToObjects_">Отмена</button>
+          <div class="modal-header_">
+            <h2 id="backToObjects_">Добавить объект</h2>
+            <div class="header-actions_">
+              <button id="backToObjects_">Отмена</button>
+              <span class="close-btn_" id="closeAddObjectModal_">&times;</span>
             </div>
-            <form class="modal-content_" id="addObjectForm">
-                <label for="object_address">Адрес:</label>
-                <input type="text" id="object_address" required placeholder="Введите адрес">
-                <label for="object_coordinates">Координаты:</label>
-                <input type="text" id="object_coordinates" required placeholder="Введите координаты">
-                <label for="object_type">Тип объекта:</label>
-                <input type="text" id="object_type" required placeholder="Введите тип объекта">
-                <button type="submit">Добавить объект</button>
-            </form>
-        </div>
+          </div>
+          <form class="modal-content_" id="addObjectForm">
+            <label for="object_address">Адрес:</label>
+            <input type="text" id="object_address" required placeholder="Введите адрес">
+            <label for="object_coordinates">Координаты:</label>
+            <input type="text" id="object_coordinates" required placeholder="Введите координаты">
+            <label for="object_type">Тип объекта:</label>
+            <input type="text" id="object_type" required placeholder="Введите тип объекта">
+            <button type="submit">Добавить объект</button>
+          </form>
+        </div>        
         <div class="modal_" id="assignObjectModal_" style="display: none;">
             <div class="modal-header_">
               <div>
                 <h2>Назначить объект</h2>
-                <button onclick="backToObjects()">Обратно</button>
+                <button onclick="backToObjects()" id="backToObjects_">Обратно</button>
               </div>
               <span class="close-btn_" id="closeAssignObjectModal_">&times;</span>
             </div>
