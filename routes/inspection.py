@@ -1,7 +1,7 @@
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for, Blueprint
 from flask_login import current_user
 from db_models import Inspection_form, Inspection_result, db, User, Admin, Inspection_ticket, Inspection_assigment
-
+from datetime import datetime
 
 inspection_bp = Blueprint('inspection', __name__)
 
@@ -11,19 +11,14 @@ def create_ticket():
         flash('Вы не зарегестррированны', 'danger')
         return redirect(url_for('index'))
     
-    user_is_not_admin = User.query.filter_by(login=current_user.login).first()
-
-    if user_is_not_admin:
-        flash('Вы не администратор.', 'danger')
-        return redirect(url_for('index'))
 
     if request.method == 'POST':
-        inspection_date = request.form['inspection_date']
+        inspection_date = datetime.utcnow()
         family_size = request.form['family_size']
         resident_category = request.form['resident_category']
         assigment_id = request.form['assigment_id']
-        user_id = request.form['user_id']
-        admin_id = current_user.id
+        user_id = current_user.id
+        admin_id = request.form['admin_id']
 
         ticket = Inspection_ticket(inspection_date=inspection_date, family_size=family_size, resident_category=resident_category, admin_id=admin_id, user_id=user_id, assigment_id=assigment_id)
 
@@ -95,6 +90,9 @@ def dashboard():
 def notifications():
     return render_template('notifications.html')
 
+def ticket_form(assigment_id):
+    assigment = Inspection_assigment.query.filter_by(id=assigment_id).first()
+    return render_template('ticket_create.html', assigment=assigment)
 
 inspection_bp.add_url_rule('/ticket/create', view_func=create_ticket, methods=['POST'])
 inspection_bp.add_url_rule('/form/create', view_func=create_form, methods=['POST'])
@@ -102,3 +100,4 @@ inspection_bp.add_url_rule('/result/create', view_func=create_result, methods=['
 inspection_bp.add_url_rule('/assigment/<int:user_id>', view_func=assigments_by_user_chek, methods=['GET'])
 inspection_bp.add_url_rule('/dashboard', view_func=dashboard, methods=['GET'])
 inspection_bp.add_url_rule('/notifications', view_func=notifications, methods=['GET'])
+inspection_bp.add_url_rule('/ticket/form/<int:assigment_id>', view_func=ticket_form, methods=['GET'])

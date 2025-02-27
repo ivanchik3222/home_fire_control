@@ -3,8 +3,8 @@ let objectsData = [];
 
 async function init() {
     var myMap = new ymaps.Map("map", {
-        center: [55.76, 37.64],
-        zoom: 7,
+        center: [54.872013, 69.170711],
+        zoom: 13,
         controls: []
     });
 

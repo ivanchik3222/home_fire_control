@@ -1,0 +1,131 @@
+@import url('https://fonts.cdnfonts.com/css/sf-ui-display');
+
+/* Общие настройки */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #2f2f2f; /* Тёмный фон страницы */
+  font-family: 'SF UI Display', sans-serif;
+  color: #ffffff;
+  width: 100%;
+  max-width: 414px; /* iPhone XR */
+  height: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+/* Заголовок */
+.task-title {
+  text-align: left;
+  font-size: 24px;
+  color: #ffffff;
+  padding-left: 30px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+/* Форма */
+.form-section {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Расстояние между элементами */
+}
+
+/* Метки (label) */
+.form-section label {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+/* Поля ввода */
+.form-section input,
+.form-section select {
+  padding: 12px;
+  border: 2px solid #4f4f4f;
+  border-radius: 6px;
+  background-color: #3f3f3f;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+/* Плейсхолдер для input */
+.form-section input::placeholder {
+  color: #aaaaaa;
+}
+
+/* Фокус для input и select */
+.form-section input:focus,
+.form-section select:focus {
+  border-color: #FFEA3C; /* Жёлтая рамка при фокусе */
+}
+
+/* Кнопка "Отправить" */
+.submit-btn {
+  background-color: #FFEA3C;
+  color: #000000;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  /* При необходимости скорректируйте отступ (margin-top) */
+  margin-top: 460px; 
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #e6d82f; /* Тёмно-жёлтый при наведении */
+}
+
+/* Нижняя панель с иконками */
+.icons {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 414px;
+  height: 60px;
+  background-color: #3f3f3f; /* Чуть светлее основного фона (#2f2f2f) */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #4f4f4f; /* Разделительная линия сверху */
+}
+
+/* Кнопки в нижней панели */
+.icons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 8px;
+  transition: background-color 0.3s;
+}
+
+/* Эффект при наведении */
+.icons button:hover {
+  background-color: #4f4f4f;
+  border-radius: 8px;
+}
+
+/* Активная кнопка (если нужно) */
+.icons button.active {
+  background-color: #4f4f4f;
+  border-radius: 8px;
+}
+
+/* Иконки внутри кнопок */
+.icons img {
+  width: 25px;
+  height: 25px;
+}
+
+.specialCategory{
+    font-family: 'SF UI Display', sans-serif;
+}
