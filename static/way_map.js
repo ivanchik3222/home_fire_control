@@ -56,11 +56,18 @@ function getUserLocation() {
             reject("Геолокация не поддерживается браузером");
         }
     });
-
-
-
 }
 
 function getPoint(str) {
-    return str.split(",").map(Number);
+    if (str.includes(", "))
+        return str.split(", ").map(Number);
+    return str.split().map(Number);
 }
+
+document.getElementById("continue").addEventListener('click', ()=>{
+    let url = window.location.href.split("/");
+    let assignmentId = url[url.length - 1];
+    const oldUrl = window.location.href;
+    const newUrl = oldUrl.replace(`/way_map/${assignmentId}`, `/ticket/form/${assignmentId}`);
+    window.location.href = newUrl;
+})

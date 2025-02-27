@@ -113,7 +113,7 @@ html, body {
   transition: background-color 0.3s;
   width: 90%;
   display: block;
-  margin: 60px auto; /* Отступ сверху и автоматическое центрирование */
+  margin: 40px auto 70px; /* Отступ сверху и автоматическое центрирование */
 }
 
 .submit-btn:hover {

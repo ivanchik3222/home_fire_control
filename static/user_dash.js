@@ -1,8 +1,12 @@
 let objectsData = [];
+
+
 function changeTab(element) {
     document.querySelectorAll(".icons button").forEach(btn => btn.classList.remove("active"));
     element.classList.add("active");
 }
+
+
 function loadObjects() {
     const user_id = document.getElementById("user_id").innerText;
     const url = `../admin/assignment/${user_id}`;
@@ -16,7 +20,11 @@ function loadObjects() {
         })
         .catch(error => console.error("Ошибка загрузки объектов:", error));
 }
+
+
 loadObjects()
+
+
 function updateTaskTable() {
     const mainElement = document.querySelector('main');
 
@@ -27,7 +35,10 @@ function updateTaskTable() {
     const tableBody = document.querySelector('.task-table tbody');
     tableBody.innerHTML = ''; // Очищаем таблицу
 
-    if (objectsData.length === 0) {
+    // Фильтруем объекты: исключаем те, у которых status равен 'completed'
+    const filteredData = objectsData.filter(obj => obj.status !== 'completed');
+
+    if (filteredData.length === 0) {
         // Если объектов для проверки нет, добавляем элементы после заголовка
         const containerImage = document.createElement('div');
         containerImage.className = 'container-image';
@@ -42,13 +53,13 @@ function updateTaskTable() {
         containerImage.insertAdjacentElement('afterend', freeText);
     } else {
         // Если объекты есть, заполняем таблицу
-        objectsData.forEach(obj => {
+        filteredData.forEach(obj => {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>
                     <div class="row">
                         <span>${obj.name}</span>
-                        <button class="work-btn" onclick="takeTask(${obj.object_id})">Взять в работу</button>
+                        <button class="work-btn" onclick="takeTask(${obj.assigment_id})">Взять в работу</button>
                     </div>
                 </td>
             `;
@@ -58,17 +69,11 @@ function updateTaskTable() {
 }
 
 
-function takeTask(objectId) {
-    fetch(`/take_task/${objectId}`, { method: 'POST' })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                updateTaskTable(); // Обновляем таблицу после взятия задачи в работу
-            } else {
-                alert('Ошибка: ' + data.error);
-            }
-        })
-        .catch(error => console.error('Ошибка при взятии задачи в работу:', error));
+
+function takeTask(assigment_id) {
+    const oldUrl = window.location.href;
+    const newUrl = oldUrl.replace("/dashboard", `/way_map/${assigment_id}`);
+    window.location.href = newUrl;
 }
 
 // Автоматическое обновление таблицы раз в 30 секунд

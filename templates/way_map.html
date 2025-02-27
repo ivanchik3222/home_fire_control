@@ -6,7 +6,6 @@
     <title>Мобильное приложение</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1" /> 
     <style>
-        
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -27,37 +26,45 @@
         }
         .nav {
             width: 100%;
-            height: 5%;
+            height: 20%;
             position: fixed;
             bottom: 0;
-            background: white;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            background: #2f2f2f;
+            color: #dbdbdb;
             
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
             padding: 10px 0;
             border-top: 1px solid #ddd;
             border-radius: 15px 15px 0 0;
         }
         .nav button {
+            width: 80%;
+            height: 60%;
             background: none;
             border: none;
             font-size: 14px;
-            color: gray;
             cursor: pointer;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .nav button.active {
-            color: blue;
+            flex-direction: row-reverse;
+            align-items: flex-start;
+            justify-content: flex-start;
         }
         .icons{
-            padding-left: 5%;
-            padding-right: 5%;
+
+            padding: 5%;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
+            width: 80%;
+            margin: 0 auto;
         }
         .icons img{
-            width: 25px;
+            width: 40px;
+        }
+        .icons button span{
+            font-family: "Roboto Condensed", serif;
+            color: #dbdbdb;
+            font-size: 2em;
         }
         .dialog {
             position: fixed;
@@ -79,6 +86,52 @@
             font-size: 16px;
             cursor: pointer;
         }
+        .continue{
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+        .icons_ {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 60px;
+            background-color: #3f3f3f; /* Чуть светлее основного фона (#2f2f2f) */
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid #4f4f4f; /* Разделительная линия сверху */
+            }
+
+            /* Кнопки в нижней панели */
+            .icons_ button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            padding: 8px;
+            transition: background-color 0.3s;
+            }
+
+            /* Эффект при наведении */
+            .icons_ button:hover {
+            background-color: #4f4f4f;
+            border-radius: 8px;
+            }
+
+            /* Активная кнопка (выделяем, если нужно) */
+            .icons_ button.active {
+            background-color: #4f4f4f;
+            border-radius: 8px;
+            }
+
+            /* Иконки внутри кнопок */
+            .icons_ img {
+            width: 25px;
+            height: 25px;
+            }
     </style>
      <script src="https://api-maps.yandex.ru/2.1/?apikey=46846752-9431-4079-9cc5-a19b85346f96&lang=ru_RU"
      type="text/javascript">
@@ -89,11 +142,19 @@
     <div id="map" class="content" style="width: 100%; height: 100%"></div>
     <nav class="nav">
       <div class="icons">
-        <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/profile.svg') }}"></button>
-        <button class="active" onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/map.svg') }}"></button>
-        <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/notification.svg') }}"></button>
+        <button id="continue">
+            <div class="continue">
+            <span>Начать проверку</span><img src="{{ url_for('static', filename='materials/arrow_forward.svg') }}">
+            </div>
+        </button>
       </div>
+      
     </nav>
+    <div class="icons_">
+        <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/home_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+        <button onclick="changeTab(this)" class="active"><img src="{{ url_for('static', filename='materials/pin_drop_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+        <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/notifications_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+    </div>
     <script src="{{ url_for('static', filename='way_map.js') }}"></script>
 </body>
 </html>

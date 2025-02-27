@@ -16,14 +16,13 @@
 <body>
     <main>
         <h1 class="task-title">ТАЛОН-УВЕДОМЛЕНИЕ</h1>
-
-        <!-- Форма с выпадающим списком и полем ввода -->
-        <div class="form-section">
-            <label for="familyCount">Количество человек в семье</label>
-            <input type="number" id="familyCount" min="1" placeholder="Укажите количество">
+        <form class="form-section" action="/inspection/ticket/create" method="post">
+          <input type="hidden" name="admin_id" value="{{ assigment.admin_id }}" id="admin_id"> 
+          <input type="hidden" name="assigment_id" value="{{ assigment.id }}" id="assigment_id">
+          <label for="familyCount">Количество человек в семье</label>
+          <input type="number" name="family_size" id="familyCount" min="1" placeholder="Укажите количество">
           <label for="specialCategory">Граждане особой категории</label>
-          <!-- Выпадающий список вместо input -->
-          <select id="specialCategory">
+          <select id="specialCategory" name="resident_category">
             <option value="" disabled selected>Выберите категорию</option>
             <option value="ветеран">Пенсионеры</option>
             <option value="инвалид">Инвалиды</option>
@@ -32,9 +31,8 @@
             <option value="прочее">Одиноко проживающие</option>
             <option value="малоимущая семья">Малоимущая семья</option>
           </select>
-
-          <button class="submit-btn">Отправить</button>
-        </div>
+          <button class="submit-btn" type="submit">Отправить</button>
+      </form>
     </main>
 
     <div class="icons">
@@ -42,5 +40,6 @@
         <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/pin_drop_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
         <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/notifications_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
     </div>
+    <script src="{{ url_for('static', filename='tickets.js') }}"></script>
 </body>
 </html>

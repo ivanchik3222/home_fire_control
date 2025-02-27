@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PyroShield - Талоны</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='check_list.css') }}">
+  <link href="https://fonts.cdnfonts.com/css/sf-ui-display" rel="stylesheet">
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/sf-ui-display');
+  </style>
+</head>
+<body>
+    <main>
+        <h1 class="task-title">ПРОВЕРОЧНЫЙ ЛИСТ</h1>
+        <!-- Добавляем скрытые поля для передачи идентификаторов и risk_score -->
+        <form method="post" class="checklist-form">
+            <input type="hidden" name="assigment_id" value="{{ assigment.assigment_id}}">
+            <input type="hidden" name="user_id" value="{{ assigment.user_id }}">
+            <input type="hidden" name="admin_id" value="{{ assigment.admin_id }}">
+            <input type="hidden" name="risk_score" value="0">
+            <table class="criteria-table">
+                <thead>
+                    <tr>
+                        <th>Параметр</th>
+                        <th>Безопасно</th>
+                        <th>Средне</th>
+                        <th>Опасно</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <select name="functional_fire_risk">
+                                <option value="" disabled selected>Категория функциональной пожарной опасности</option>
+                                <option value="детские">Детские</option>
+                                <option value="больницы">Больницы</option>
+                                <option value="интернаты">Интернаты/Жилые дома/Офисы</option>
+                                <option value="тц">ТЦ/Склады</option>
+                                <option value="ангары">Ангары</option>
+                            </select>
+                        </td>
+                        <td><input type="radio" name="row11" value="безопасно"></td>
+                        <td><input type="radio" name="row11" value="средне"></td>
+                        <td><input type="radio" name="row11" value="опасно"></td>
+                    </tr>
+                    {% for value in [
+                      "Степень огнестойкости и класс конструктивной пожарной опасности",
+                      "Состояние систем противопожарной защиты",
+                      "Состояние путей эвакуации",
+                      "Эксплуатация электрических сетей и оборудования",
+                      "Содержание территории и зданий",
+                      "Наличие первичных средств пожаротушения",
+                      "Соблюдение требований к вентиляционным системам",
+                      "Характеристика хранимых веществ и материалов",
+                      "Обеспечение противопожарного водоснабжения"
+                  ] %}
+                  <tr>
+                      <td>{{ value }}</td>
+                      <td><input type="radio" name="row{{ loop.index }}" value="безопасно"></td>
+                      <td><input type="radio" name="row{{ loop.index }}" value="средне"></td>
+                      <td><input type="radio" name="row{{ loop.index }}" value="опасно"></td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="conclusion-section">
+                <label for="conclusion">Заключение</label>
+                <select id="conclusion" name="conclusion">
+                    <option value="" disabled selected>Выберите заключение</option>
+                    <option value="пожаробезопасно">Пожаробезопасно (0-3б)</option>
+                    <option value="средней_опасности">Средней опасности (4-6б)</option>
+                    <option value="пожароопасно">Пожароопасно (7-10б)</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">Отправить</button>
+        </form>
+    </main>
+
+
+    <div class="icons">
+        <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/home_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+        <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/pin_drop_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+        <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/notifications_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+    </div>
+    <script src="{{ url_for('static', filename='check_list.js') }}"></script>
+</body>
+</html>
