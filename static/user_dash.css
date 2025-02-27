@@ -1,109 +1,126 @@
+@import url('https://fonts.cdnfonts.com/css/sf-ui-display');
+
+/* Общие настройки */
 html, body {
-    margin: 0;
-    padding: 0;
-    background-color: #2f2f2f; /* Тёмный фон */
-    font-family: 'SF UI Display', sans-serif;
-    color: #ffffff; /* Текст по умолчанию – белый */
+  margin: 0;
+  padding: 0;
+  background-color: #2f2f2f; /* Тёмный фон страницы */
+  font-family: 'SF UI Display', sans-serif;
+  color: #ffffff;
+  width: 100%;
+  max-width: 414px; /* iPhone XR */
+  height: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
 }
 
-/* Навигационная панель (пример из вашего кода) */
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 1160px;
-    height: 50px;
-    background: #3f3f3f; /* Подстраиваем под тёмный фон */
-    padding: 0 20px;
-    position: absolute;
-    top: 35px; /* Отступ от верхней границы */
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-}
-
-.logo img {
-    height: 30px;
-}
-
-.nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links li a {
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 16px;
+/* Добавляем отступ снизу под контент, чтобы нижняя панель не перекрывала таблицу */
+main {
+  padding-bottom: 70px; /* Под высоту нижней панели + небольшой запас */
 }
 
 /* Заголовок "Список задач" */
 .task-title {
-    margin-top: 120px; /* Чтобы не перекрываться навбаром */
-    text-align: center;
-    font-size: 28px;
-    color: #ffffff;
+  text-align: left;
+  font-size: 24px;
+  color: #ffffff;
+  padding-left: 30px;
+  margin-bottom: 50px;
+  margin-top: 50px;
 }
 
 /* Таблица */
 .task-table {
-    margin: 40px auto;
-    width: 80%;
-    border-collapse: collapse;
-    background-color: #3f3f3f;
-    border: 1px solid #4f4f4f;
-    border-radius: 8px;
-    overflow: hidden; /* для корректного скругления */
+  margin: 20px auto;
+  width: 90%;
+  border-collapse: collapse;
+  background-color: #3f3f3f;
+  border: 1px solid #4f4f4f;
+  border-radius: 8px;
+  overflow: hidden;
+  /* Если мешает отображению рамок, уберите: */
+  border-spacing: 30px;
+  font-family: 'SF UI Display', sans-serif;
 }
 
-/* Шапка таблицы */
-.task-table thead {
-    background-color: #4f4f4f;
-}
-
-.task-table th,
+/* Ячейки таблицы */
 .task-table td {
-    padding: 16px 20px;
-    border-bottom: 1px solid #5f5f5f;
-    text-align: left;
-    color: #ffffff;
-    font-size: 16px;
+  padding: 12px 8px;
+  border-bottom: 1px solid #5f5f5f;
+  text-align: left;
+  color: #ffffff;
+  font-size: 17px;
 }
 
-.task-table th {
-    font-weight: 600;
-}
-
-/* Подсветка при наведении на строку */
 .task-table tbody tr:hover {
-    background-color: #5f5f5f;
+  background-color: #5f5f5f;
+}
+
+/* Строка внутри таблицы (текст + кнопка) */
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* Кнопка "Взять в работу" */
 .work-btn {
-    background-color: transparent;
-    color: #ffffff;
-    border: 2px solid #FFEA3C;
-    border-radius: 4px;
-    padding: 6px 12px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: 0.3s;
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid #FFEA3C;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+  font-family: 'SF UI Display', sans-serif;
 }
 
-/* Ховер-эффект для кнопки */
 .work-btn:hover {
-    background-color: #FFEA3C;
-    color: #000000;
+  background-color: #FFEA3C;
+  color: #000000;
 }
 
-table{
-    background-color: white;
-    border-radius: 10px;
-    font-size: larger;
-    border-spacing: 6px;
-    width: 100%;
-    font-family: 'SF UI Display', sans-serif;
+/* Нижняя панель с иконками */
+.icons {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 414px;
+  height: 60px;
+  background-color: #3f3f3f; /* Чуть светлее основного фона (#2f2f2f) */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #4f4f4f; /* Разделительная линия сверху */
+}
+
+/* Кнопки в нижней панели */
+.icons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 8px;
+  transition: background-color 0.3s;
+}
+
+/* Эффект при наведении */
+.icons button:hover {
+  background-color: #4f4f4f;
+  border-radius: 8px;
+}
+
+/* Активная кнопка (выделяем, если нужно) */
+.icons button.active {
+  background-color: #4f4f4f;
+  border-radius: 8px;
+}
+
+/* Иконки внутри кнопок */
+.icons img {
+  width: 25px;
+  height: 25px;
 }
