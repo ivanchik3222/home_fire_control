@@ -1,0 +1,156 @@
+@import url('https://fonts.cdnfonts.com/css/sf-ui-display');
+
+/* Общие настройки */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #2f2f2f; /* Тёмный фон страницы */
+  font-family: 'SF UI Display', sans-serif;
+  color: #ffffff;
+  width: 100%;
+  max-width: 414px; /* iPhone XR */
+  height: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+/* Заголовок */
+.task-title {
+  text-align: left;
+  font-size: 24px;
+  color: #ffffff;
+  padding-left: 30px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+/* Таблица критериев */
+.criteria-table {
+  width: 90%;
+  margin: 0 auto 20px auto;
+  border-collapse: collapse;
+  background-color: #3f3f3f;
+  border: 1px solid #4f4f4f;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.criteria-table th,
+.criteria-table td {
+  padding: 10px;
+  border: 1px solid #4f4f4f;
+  text-align: center;
+  font-size: 12px;
+  color: #ffffff;
+}
+
+.criteria-table th {
+  background-color: #4f4f4f;
+  font-weight: bold;
+}
+
+/* Стилизация выпадающего списка в таблице */
+.criteria-table td select {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #4f4f4f;
+  border-radius: 4px;
+  background-color: #3f3f3f;
+  color: #ffffff;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.criteria-table td select:focus {
+  border-color: #FFEA3C;
+}
+
+/* Увеличение радиокнопок для удобства на мобильном */
+.criteria-table td input[type="radio"] {
+  transform: scale(1.2);
+}
+
+/* Блок для заключения */
+.conclusion-section {
+  width: 90%;
+  margin: 10px auto 20px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.conclusion-section label {
+  font-size: 16px;
+  color: #ffffff;
+  text-align: left;
+}
+
+.conclusion-section select {
+  padding: 10px;
+  border: 2px solid #4f4f4f;
+  border-radius: 6px;
+  background-color: #3f3f3f;
+  color: #ffffff;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.conclusion-section select:focus {
+  border-color: #FFEA3C;
+}
+
+/* Кнопка "Отправить" - размещена после всех блоков и центрирована */
+.submit-btn {
+  background-color: #FFEA3C;
+  color: #000000;
+  border: none;
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 90%;
+  display: block;
+  margin: 60px auto; /* Отступ сверху и автоматическое центрирование */
+}
+
+.submit-btn:hover {
+  background-color: #e6d82f; /* Тёмно-жёлтый при наведении */
+}
+
+/* Нижняя панель с иконками */
+.icons {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 414px;
+  height: 60px;
+  background-color: #3f3f3f; /* Чуть светлее основного фона */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #4f4f4f;
+}
+
+.icons button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 8px;
+  transition: background-color 0.3s;
+}
+
+.icons button:hover {
+  background-color: #4f4f4f;
+  border-radius: 8px;
+}
+
+.icons img {
+  width: 25px;
+  height: 25px;
+}

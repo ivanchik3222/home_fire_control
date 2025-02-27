@@ -82,6 +82,14 @@ body{
     left: 903px;    
 }
 
+.vector-5{
+    position: absolute;
+    width: 37;
+    height: 58.0025749206543;
+    top: 170px;
+    left: 523px;     
+}
+
 .button-1{
     position: absolute;
     width: 37;
@@ -91,18 +99,9 @@ body{
 }
 
 .button-2{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 160px;
-    height: 50px;
-    background: white;
-    padding: 0 20px;
     position: absolute;
-    top: 280px; /* Отступ от верхней границы */
-    left: -27%;
-    transform: translateX(-50%);
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    font-family: 'SF UI Display', sans-serif;
+    width: 200px;
+    height: 58.0025749206543;
+    top: 175px;
+    left: 533px; 
 }
