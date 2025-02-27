@@ -236,6 +236,7 @@ admin_bp.add_url_rule('/user/<int:user_id>/assignments', view_func=assigments_by
 admin_bp.add_url_rule('/assignment/<int:assigment_id>/result', view_func=assigment_result, methods=['GET'])
 admin_bp.add_url_rule('/objects', view_func=get_objects, methods=['GET'])
 admin_bp.add_url_rule('/assignment/<int:user_id>', view_func=get_assignments, methods=['GET'])
+
 # Изменение
 admin_bp.add_url_rule('/assigment/<int:assigment_id>/edit', view_func=edit_result, methods=['PUT'])
 admin_bp.add_url_rule('/user/<int:user_id>/edit', view_func=edit_user, methods=['PUT'])

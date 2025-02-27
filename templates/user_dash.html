@@ -9,18 +9,24 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='user_dash.css') }}">
   <!-- Подключаем шрифт SF UI Display -->
   <link href="https://fonts.cdnfonts.com/css/sf-ui-display" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <style>
     @import url('https://fonts.cdnfonts.com/css/sf-ui-display');
   </style>
 </head>
 <body>
+  <div id="user_id" style="display: none;">{{ user_id }}</div>
   <!-- Основной контент -->
   <main>
     <h1 class="task-title">Список задач</h1>
     
+    <div class="container-image"></div>
+    <div class="free-text">Нет объектов для проверки</div>
+    
     <table class="task-table">
       <tbody>
-        <!-- Пример строк -->
         <tr>
           <td>
             <div class="row">
@@ -49,11 +55,11 @@
     </table>
   </main>
 
-  <!-- Кнопки с иконками -->
   <div class="icons">
     <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/home_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
-    <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/pin_drop_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+    <button onclick="changeTab(this)" class="active"><img src="{{ url_for('static', filename='materials/pin_drop_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
     <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/notifications_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
   </div>
+  <script src="{{ url_for('static', filename='user_dash.js') }}"></script>
 </body>
 </html>
