@@ -88,7 +88,9 @@ def assigments_by_user_chek(user_id):
 
 def dashboard():
     user_id = session.get('user_id')  # Получаем ID пользователя из сессии
-    return render_template('mobile.html', user_id=user_id)
+    if user_id:
+        return render_template('user_dash.html', user_id=user_id)
+    return redirect(url_for('auth.user_login'))
 
 def notifications():
     return render_template('notifications.html')

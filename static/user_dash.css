@@ -10,12 +10,15 @@ html, body {
   width: 100%;
   max-width: 414px; /* iPhone XR */
   height: 100%;
-  margin: 0 auto;
   overflow-x: hidden;
 }
 
 /* Добавляем отступ снизу под контент, чтобы нижняя панель не перекрывала таблицу */
 main {
+  margin: 0 20px;
+  width: 90%;
+  max-width: 414px;
+  height: 90%;
   padding-bottom: 70px; /* Под высоту нижней панели + небольшой запас */
 }
 
@@ -23,7 +26,7 @@ main {
 .task-title {
   text-align: left;
   font-size: 24px;
-  color: #ffffff;
+  color: #ebebeb;
   padding-left: 30px;
   margin-bottom: 50px;
   margin-top: 50px;
@@ -88,7 +91,6 @@ main {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 414px;
   height: 60px;
   background-color: #3f3f3f; /* Чуть светлее основного фона (#2f2f2f) */
   display: flex;
@@ -123,4 +125,21 @@ main {
 .icons img {
   width: 25px;
   height: 25px;
+}
+.container-image {
+   /* Отступы слева и справа */
+  background: url('materials/chill.png') no-repeat center center;
+  background-size: contain; /* Изображение масштабируется так, чтобы полностью помещаться в контейнер */
+  width: 100%; /* Ширина экрана минус отступы */
+  height: 70%; /* Автоматическая высота для сохранения пропорций изображения */
+  transition: background-image 0.5s ease-in-out;
+  opacity: 0.6;
+}
+.free-text{
+  margin: 0 10px;
+  text-align: center;
+  font-size: 2em;
+  margin-top: -40px;
+  color:#888888;
+  font-family: "Roboto Condensed", serif;
 }
