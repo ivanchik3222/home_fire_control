@@ -168,11 +168,6 @@ def edit_user(user_id):
 
 @login_required
 def admin_panel():
-    # Проверяем, что текущий пользователь — администратор
-    admin = Admin.query.filter_by(login=current_user.login).first()
-    if not admin:
-        print('Вы не администратор.', 'danger')
-        return redirect(url_for('auth.register'))
     # Получаем всех пользователей, зарегистрированных этим администратором
     users = User.query.filter_by(admin_id=current_user.id).all()
     data = []

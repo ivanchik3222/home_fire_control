@@ -75,8 +75,6 @@ let currentIndex = 0;
 const rowsPerPage = 3;
 let projectsData = [];
 
-updateTable();
-
 function updateTable() {
     const user_id = document.getElementById("user_id").innerText;
 

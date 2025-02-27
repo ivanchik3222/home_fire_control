@@ -86,6 +86,8 @@ def assigments_by_user_chek(user_id):
     return jsonify(result_json)
 
 
+
+
 inspection_bp.add_url_rule('/ticket/create', view_func=create_ticket, methods=['POST'])
 inspection_bp.add_url_rule('/form/create', view_func=create_form, methods=['POST'])
 inspection_bp.add_url_rule('/result/create', view_func=create_result, methods=['POST'])

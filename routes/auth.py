@@ -75,9 +75,9 @@ def user_login():
         if user and check_password_hash(user.password_hash, password):
             login_user(user)
             flash('Вход выполнен!', 'success')
-            return redirect(url_for('index'))
+            return render_template('mobile.html')
         else:
-            flash('Ошибка авторизации! Проверьте данные.', 'danger')
+            print('Ошибка авторизации! Проверьте данные.', 'danger')
     return render_template('user_login.html')
 
 def logout():
