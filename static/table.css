@@ -1,3 +1,7 @@
+body{
+    background: #363636;
+}
+
 /* Навигационная панель */
 .navbar {
     display: flex;
@@ -5,7 +9,7 @@
     justify-content: space-between;
     width: 80%;
     height: 50px;
-    background: #FFEA3C;
+    background: #fff;
     padding: 0 20px;
     position: absolute;
     top: 35px;
@@ -13,11 +17,13 @@
     transform: translateX(-50%);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
+    font-family: 'SF UI Display', sans-serif;
 }
 
 /* Логотип */
 .logo img {
     height: 30px;
+    
 }
 
 /* Список навигации */
@@ -324,7 +330,7 @@
 /* Стили для кнопки */
 .icon-button {
     margin-bottom: 5%;
-    background-color: #ffd900;
+    background-color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -341,19 +347,20 @@
 }
 
 table {
-    background-color: rgb(39, 39, 39);
+    background-color: white;
     border-radius: 10px;
     font-size: larger;
     border-spacing: 6px;
     width: 100%;
+    font-family: 'SF UI Display', sans-serif;
 }
 
 thead {
-    color: white;
+    color: #363636
 }
 
 tbody td {
-    background-color: white;
+    background-color: #363636;
     border-radius: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
