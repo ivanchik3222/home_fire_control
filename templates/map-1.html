@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/map-1.css">
+    <title>Карта 2ГИС</title>
+
+    <!-- Подключаем Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <!-- Контейнер для карты -->
+    <section class="map-container">
+        <div id="map"></div>
+    </section>
+
+    <!-- Левая панель -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <img src="../static/materials/Въезд_в_Петропавловск.jpg" alt="Фон панели">
+        </div>
+
+        <ul class="faq-list">
+            <li class="faq-item">
+                <button class="faq-question">
+                    Из каких материалов изготавливается?
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer">Обычно используются ДСП, ЛДСП, натуральное дерево...</div>
+            </li>
+            <li class="faq-item">
+                <button class="faq-question">
+                    Как проводится оплата и сколько траншей есть?
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer">Оплата проводится в 2 этапа: 50% предоплата и 50% после выполнения заказа.</div>
+            </li>
+            <li class="faq-item">
+                <button class="faq-question">
+                    Какие у вас есть скидки и спец. предложения?
+                    <span class="faq-toggle">−</span>
+                </button>
+                <div class="faq-answer active">
+                    Для только открывшихся бизнесов и для новосельцев скидка в размере 20% на первую мебель.
+                </div>
+            </li>
+            <li class="faq-item">
+                <button class="faq-question">
+                    Предоставляется ли гарантия на мебель?
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer">Гарантия на мебель — 2 года.</div>
+            </li>
+            <li class="faq-item">
+                <button class="faq-question">
+                    Есть ли у вас примеры выполненных проектов?
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer">Да, примеры работ можно посмотреть в разделе "Наши работы".</div>
+            </li>
+            <li class="faq-item">
+                <button class="faq-question">
+                    Какие методы оплаты принимаются?
+                    <span class="faq-toggle">+</span>
+                </button>
+                <div class="faq-answer">Принимаем оплату картами Visa/Mastercard, наличными и через Kaspi.</div>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Подключаем Leaflet и кастомный JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="../static/map-1.js"></script>
+</body>
+</html>
