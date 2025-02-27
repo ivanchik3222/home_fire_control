@@ -1,4 +1,4 @@
-from flask import Flask, flash, redirect, render_template, request, url_for, Blueprint
+from flask import Flask, flash, redirect, render_template, request, session, url_for, Blueprint
 from flask_login import LoginManager, login_user, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from db_models import db, User, Admin  # Предполагается, что у вас есть модели User и Admin
@@ -74,10 +74,11 @@ def user_login():
         user = User.query.filter_by(login=login_val).first()
         if user and check_password_hash(user.password_hash, password):
             login_user(user)
+            session['user_id'] = user.id  # Сохраняем ID пользователя в сессии
             flash('Вход выполнен!', 'success')
-            return render_template('mobile.html')
+            return redirect(url_for('inspection.dashboard'))
         else:
-            print('Ошибка авторизации! Проверьте данные.', 'danger')
+            flash('Ошибка авторизации! Проверьте данные.', 'danger')
     return render_template('user_login.html')
 
 def logout():
