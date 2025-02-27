@@ -90,9 +90,13 @@ def dashboard():
     user_id = session.get('user_id')  # Получаем ID пользователя из сессии
     return render_template('mobile.html', user_id=user_id)
 
+def notifications():
+    return render_template('notifications.html')
+
 
 inspection_bp.add_url_rule('/ticket/create', view_func=create_ticket, methods=['POST'])
 inspection_bp.add_url_rule('/form/create', view_func=create_form, methods=['POST'])
 inspection_bp.add_url_rule('/result/create', view_func=create_result, methods=['POST'])
 inspection_bp.add_url_rule('/assigment/<int:user_id>', view_func=assigments_by_user_chek, methods=['GET'])
 inspection_bp.add_url_rule('/dashboard', view_func=dashboard, methods=['GET'])
+inspection_bp.add_url_rule('/notifications', view_func=notifications, methods=['GET'])
