@@ -206,13 +206,19 @@ def get_objects():
 def get_assignments(user_id):
     objects = Inspection_assigment.query.filter(Inspection_assigment.user_id == user_id).all()
     print(objects)
+
+    for i in objects:
+        print(i.object_id)
+
     objects_list = [
         {
             "name": Inspection_object.query.filter_by(id=obj.object_id).first().address,
             "status": obj.status,
             "date": obj.created_at,
             "coordinates": Inspection_object.query.filter_by(id=obj.object_id).first().coordinates,
-            "object_id": obj.object_id
+            "object_id":obj.object_id,
+            "assigment_id": obj.id,
+            "admin_id": obj.admin_id
 
         } 
         for obj in objects

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мобильное приложение</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1" /> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='notifications.css') }}">
+</head>
+<body>
+    <div id="user_id" style="display: none;">{{ user_id }}</div>
+    <main>
+        <h1 class="task-title">Список задач</h1>
+        <section>
+          <div class="row">
+            <span>ул. Пушкина, д. 1</span><button class="work-btn">Взять в работу</button>
+          </div>
+          <div class="row">
+            <span>пр. Ленина, д. 45</span><button class="work-btn">Взять в работу</button>
+          </div>
+          <div class="row">
+            <span>ул. Садовая, д. 12</span><button class="work-btn">Взять в работу</button>
+          </div>
+        </section>
+    </main>
+    <nav class="nav">
+      <div class="icons">
+        <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/profile.svg') }}"></button>
+        <button class="active" onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/map.svg') }}"></button>
+        <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/notification.svg') }}"></button>
+      </div>
+    </nav>
+    <div id="dialog" class="dialog">
+        <div class="dialog-content">
+            <p>Вы хотите начать проверку?</p>
+            <button onclick="startCheck()">Начать проверку</button>
+            <button onclick="closeDialog()">Отмена</button>
+        </div>
+    </div>
+    <script>
+        function changeTab(element) {
+            document.querySelectorAll(".nav button").forEach(btn => btn.classList.remove("active"));
+            element.classList.add("active");
+        }
+    </script>
+    <script src="{{ url_for('static', filename='notifications.js') }}"></script>
+</body>
+</html>
