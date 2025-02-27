@@ -1,6 +1,6 @@
 from flask import Flask, flash, jsonify, redirect, render_template, request, session, url_for, Blueprint
 from flask_login import current_user
-from db_models import Inspection_form, Inspection_result, db, User, Admin, Inspection_ticket, Inspection_assigment
+from db_models import Inspection_form, Inspection_object, Inspection_result, db, User, Admin, Inspection_ticket, Inspection_assigment
 from datetime import datetime
 
 inspection_bp = Blueprint('inspection', __name__)
@@ -92,6 +92,11 @@ def ticket_form(assigment_id):
     assigment = Inspection_assigment.query.filter_by(id=assigment_id).first()
     return render_template('ticket_create.html', assigment=assigment)
 
+def  way_map(assigment_id):
+    assigment = Inspection_assigment.query.filter_by(id=assigment_id).first()
+    object = Inspection_object.query.filter_by(id=assigment.object_id).first()
+    return render_template('way_map.html', coordinates=object.coordinates)
+
 inspection_bp.add_url_rule('/ticket/create', view_func=create_ticket, methods=['POST'])
 inspection_bp.add_url_rule('/form/create', view_func=create_form, methods=['POST'])
 inspection_bp.add_url_rule('/result/create', view_func=create_result, methods=['POST'])
@@ -99,3 +104,4 @@ inspection_bp.add_url_rule('/assigment/<int:user_id>', view_func=assigments_by_u
 inspection_bp.add_url_rule('/dashboard', view_func=dashboard, methods=['GET'])
 inspection_bp.add_url_rule('/notifications', view_func=notifications, methods=['GET'])
 inspection_bp.add_url_rule('/ticket/form/<int:assigment_id>', view_func=ticket_form, methods=['GET'])
+inspection_bp.add_url_rule('/way_map/<int:assigment_id>', view_func=way_map, methods=['GET'])
