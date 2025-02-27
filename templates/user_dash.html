@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyroShield - Список задач</title>
+    <!-- Подключаем основные стили -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='user_dash.css') }}">
+    <link href="https://fonts.cdnfonts.com/css/sf-ui-display" rel="stylesheet">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/sf-ui-display');
+    </style>
+</head>
+<body>
+    <!-- Шапка сайта (навигационная панель) -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='/materials/Vector.png') }}" alt="Логотип">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Главная</a></li>
+                <li><a href="#">Почему мы?</a></li>
+                <li><a href="#">Как мы работаем?</a></li>
+                <li><a href="#">Наша команда</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <h1 class="task-title">Список задач</h1>
+        
+        <table class="task-table">
+            <thead>
+                <tr>
+                    <th>Адрес</th>
+                    <th>Работа</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Пример строк -->
+                <tr>
+                    <td>ул. Пушкина, д. 1</td>
+                    <td><button class="work-btn">Взять в работу</button></td>
+                </tr>
+                <tr>
+                    <td>пр. Ленина, д. 45</td>
+                    <td><button class="work-btn">Взять в работу</button></td>
+                </tr>
+                <tr>
+                    <td>ул. Садовая, д. 12</td>
+                    <td><button class="work-btn">Взять в работу</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>
