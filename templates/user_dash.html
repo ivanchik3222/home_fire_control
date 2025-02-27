@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <!-- Адаптивность для мобильных устройств -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PyroShield - Список задач</title>
+  <!-- Подключаем ваши стили -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='user_dash.css') }}">
+  <!-- Подключаем шрифт SF UI Display -->
+  <link href="https://fonts.cdnfonts.com/css/sf-ui-display" rel="stylesheet">
+  <style>
+    @import url('https://fonts.cdnfonts.com/css/sf-ui-display');
+  </style>
+</head>
+<body>
+  <!-- Основной контент -->
+  <main>
+    <h1 class="task-title">Список задач</h1>
+    
+    <table class="task-table">
+      <tbody>
+        <!-- Пример строк -->
+        <tr>
+          <td>
+            <div class="row">
+              <span>ул. Пушкина, д. 1</span>
+              <button class="work-btn">Взять в работу</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="row">
+              <span>пр. Ленина, д. 45</span>
+              <button class="work-btn">Взять в работу</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="row">
+              <span>ул. Садовая, д. 12</span>
+              <button class="work-btn">Взять в работу</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <!-- Кнопки с иконками -->
+  <div class="icons">
+    <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/home_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+    <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/pin_drop_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+    <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/notifications_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+  </div>
+</body>
+</html>

@@ -85,6 +85,9 @@ def dashboard():
     user_id = session.get('user_id')  # Получаем ID пользователя из сессии
     return render_template('mobile.html', user_id=user_id)
 
+def notifications():
+    return render_template('notifications.html')
+
 def ticket_form(assigment_id):
     assigment = Inspection_assigment.query.filter_by(id=assigment_id).first()
     return render_template('ticket_create.html', assigment=assigment)
@@ -94,4 +97,5 @@ inspection_bp.add_url_rule('/form/create', view_func=create_form, methods=['POST
 inspection_bp.add_url_rule('/result/create', view_func=create_result, methods=['POST'])
 inspection_bp.add_url_rule('/assigment/<int:user_id>', view_func=assigments_by_user_chek, methods=['GET'])
 inspection_bp.add_url_rule('/dashboard', view_func=dashboard, methods=['GET'])
+inspection_bp.add_url_rule('/notifications', view_func=notifications, methods=['GET'])
 inspection_bp.add_url_rule('/ticket/form/<int:assigment_id>', view_func=ticket_form, methods=['GET'])

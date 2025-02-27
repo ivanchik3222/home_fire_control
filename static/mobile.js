@@ -48,6 +48,7 @@ async function loadObjects() {
         let data = await response.json();
         console.log("Данные загружены:", data);
         objectsData = data;
+        
     } catch (error) {
         console.error("Ошибка загрузки объектов:", error);
     }
