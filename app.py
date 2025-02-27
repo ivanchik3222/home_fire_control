@@ -7,6 +7,7 @@ from routes.auth import auth_bp
 from routes.admin import admin_bp
 from routes.analytics import analytics_bp
 from routes.inspection import inspection_bp
+from routes.exel_script import exel_bp
 
 
 login_manager = LoginManager()
@@ -22,6 +23,7 @@ app.register_blueprint(auth_bp, url_prefix='/auth')
 app.register_blueprint(admin_bp, url_prefix='/admin')
 app.register_blueprint(analytics_bp, url_prefix='/analytics')
 app.register_blueprint(inspection_bp, url_prefix='/inspection')
+app.register_blueprint(exel_bp, url_prefix='/excel')
 
 # Инициализация базы данных
 db.init_app(app)
