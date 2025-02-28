@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель администратора - Пользователи</title>
+    <link rel="stylesheet" href="../static/analytics.css">
+    <link href="https://fonts.cdnfonts.com/css/sf-ui-display" rel="stylesheet">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/sf-ui-display');
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='materials/Frame 13.png') }}" alt="Логотип">
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Главная</a></li>
+                <li><a href="/admin/main">Админ</a></li>
+                <li><a href="#">Профиль</a></li>
+                <li><a href="map.html">Карты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="table-title">Список пользователей</h1>
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Имя пользователя</th>
+                    <th>Адрес объекта</th>
+                    <th>Выполнено</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in data %}
+                <tr>
+                    <td>{{ item.user.full_name }}</td>
+                    <td>{{ item.address }}</td>
+                    <td>
+                        <button class="details-button">Выгрузить в Excel</button>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">Нет зарегистрированных пользователей.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

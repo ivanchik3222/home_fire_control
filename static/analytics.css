@@ -1,0 +1,103 @@
+@import url('https://fonts.cdnfonts.com/css/sf-ui-display');
+
+body {
+    background: #363636;
+    font-family: 'SF UI Display', sans-serif;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Заголовок таблицы */
+.table-title {
+    text-align: center;
+    font-size: 24px;
+    color: #ffffff;
+    margin-top: 100px;
+}
+
+/* Центрирование таблицы */
+.admin-table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #3f3f3f;
+    border-radius: 8px;
+    overflow: hidden;
+    color: white;
+}
+
+/* Заголовки таблицы */
+.admin-table thead {
+    background-color: #4f4f4f;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #5f5f5f;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Последняя строка без границы */
+.admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Подсветка строк при наведении */
+.admin-table tbody tr:hover {
+    background-color: #555555;
+}
+
+/* Кнопка "Выгрузить в Excel" */
+.details-button {
+    background-color: #FFEA3C;
+    color: #000000;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.details-button:hover {
+    background-color: #e6d82f;
+}
+
+/* Навигационная панель */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    height: 50px;
+    background: #fff;
+    padding: 0 20px;
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: 'SF UI Display', sans-serif;
+}
+
+/* Логотип */
+.logo img {
+    height: 30px;
+}
+
+/* Список навигации */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
