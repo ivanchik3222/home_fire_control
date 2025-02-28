@@ -1,11 +1,6 @@
 let objectsData = [];
 
 
-function changeTab(element) {
-    document.querySelectorAll(".icons button").forEach(btn => btn.classList.remove("active"));
-    element.classList.add("active");
-}
-
 
 function loadObjects() {
     const user_id = document.getElementById("user_id").innerText;

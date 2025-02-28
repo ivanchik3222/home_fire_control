@@ -22,9 +22,6 @@
   <main>
     <h1 class="task-title">Список задач</h1>
     
-    <div class="container-image"></div>
-    <div class="free-text">Нет объектов для проверки</div>
-    
     <table class="task-table">
       <tbody>
         <tr>
@@ -56,10 +53,17 @@
   </main>
 
   <div class="icons">
-    <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/home_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
-    <button onclick="changeTab(this)" class="active"><img src="{{ url_for('static', filename='materials/pin_drop_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
-    <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/notifications_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+    <button onclick="changeTab(this, '/inspection/profile')"><img src="{{ url_for('static', filename='materials/profile.svg') }}"></button>
+    <button class="active"><img src="{{ url_for('static', filename='materials/pin_drop_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+    <button onclick="changeTab(this, '/inspection/notifications')"><img src="{{ url_for('static', filename='materials/notifications_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
   </div>
   <script src="{{ url_for('static', filename='user_dash.js') }}"></script>
+  <script>
+    function changeTab(element, site) {
+        document.querySelectorAll(".nav button").forEach(btn => btn.classList.remove("active"));
+        element.classList.add("active");
+        window.location.href = site;
+    }
+</script>
 </body>
 </html>

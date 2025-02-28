@@ -4,22 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Мобильное приложение</title>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1" /> 
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, maximum-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='notifications.css') }}">
 </head>
 <body>
-    <div id="user_id" style="display: none;">{{ user_id }}</div>
-    <nav class="nav">
-      <div class="icons">
-        <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/profile.svg') }}"></button>
-        <button class="active" onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/map.svg') }}"></button>
-        <button onclick="changeTab(this)"><img src="{{ url_for('static', filename='materials/notification.svg') }}"></button>
-      </div>
-    </nav>
+    
+    
+  <div class="icons">
+    <button onclick="changeTab(this, '/inspection/profile')"><img src="{{ url_for('static', filename='materials/profile.svg') }}"></button>
+    <button onclick="changeTab(this, '/inspection/dashboard')"><img src="{{ url_for('static', filename='materials/pin_drop_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+    <button class="active"><img src="{{ url_for('static', filename='materials/notifications_30dp_FFFFFFFF_FILL0_wght400_GRAD0_opsz24.png') }}"></button>
+  </div>
+    
+
+    <!-- Контейнер для уведомлений -->
+    <div id="notifications-container" class="hidden">
+        <h2>Уведомления</h2>
+        <ul id="notifications-list"></ul>
+    </div>
+
     <script>
-        function changeTab(element) {
+        function changeTab(element, site) {
             document.querySelectorAll(".nav button").forEach(btn => btn.classList.remove("active"));
             element.classList.add("active");
+            window.location.href = site;
         }
     </script>
     <script src="{{ url_for('static', filename='notifications.js') }}"></script>

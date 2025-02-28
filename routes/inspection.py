@@ -87,7 +87,6 @@ def get_notifications():
         return redirect(url_for('auth.user_login'))
 
     notifications = Notification.query.filter_by(user_id=user_id).order_by(Notification.created_at.desc()).all()
-    Notification.query.filter_by(user_id=user_id, is_read=False).update({"is_read": True})
     notifications_data = [
         {
             "id": n.id,
@@ -96,6 +95,7 @@ def get_notifications():
         }
         for n in notifications
     ]
+    Notification.query.filter_by(user_id=user_id, is_read=False).update({"is_read": True})
 
     return jsonify({"notifications": notifications_data}), 200
 
