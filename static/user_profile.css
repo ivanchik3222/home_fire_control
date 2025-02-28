@@ -1,0 +1,120 @@
+@import url('https://fonts.cdnfonts.com/css/sf-ui-display');
+
+/* Общие настройки */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #2f2f2f; /* Тёмный фон */
+  font-family: 'SF UI Display', sans-serif;
+  color: #ffffff;
+  width: 100%;
+  max-width: 414px; /* iPhone XR */
+  height: 100%;
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+/* Контейнер профиля */
+.profile-container {
+    background: #3f3f3f;
+    border-radius: 12px;
+    padding: 20px;
+    width: 85%;
+    margin: 80px auto 40px auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Заголовок профиля */
+.profile-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Блок информации */
+.profile-info {
+    background: #4f4f4f;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* Элементы профиля */
+.profile-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    padding: 10px;
+}
+
+/* Метки */
+.label {
+    font-weight: bold;
+    color: #FFEA3C;
+}
+
+/* Значения */
+.value {
+    color: #ffffff;
+}
+
+/* Заголовок секции */
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #FFEA3C;
+    text-align: center;
+}
+
+/* Список работ */
+.work-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.work-item {
+    background: #4f4f4f;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 5px auto;
+    width: 90%;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* Нижняя панель с иконками */
+.icons {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 414px;
+    height: 60px;
+    background-color: #3f3f3f;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid #4f4f4f;
+}
+
+.icons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 8px;
+    transition: background-color 0.3s;
+}
+
+.icons button:hover {
+    background-color: #4f4f4f;
+    border-radius: 8px;
+}
+
+.icons img {
+    width: 25px;
+    height: 25px;
+}
