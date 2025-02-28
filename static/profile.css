@@ -1,0 +1,113 @@
+@import url('https://fonts.cdnfonts.com/css/sf-ui-display');
+
+body {
+    background: #363636;
+    font-family: 'SF UI Display', sans-serif;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Навигационная панель */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    height: 50px;
+    background: #fff;
+    padding: 0 20px;
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Логотип */
+.logo img {
+    height: 30px;
+}
+
+/* Список навигации */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+}
+
+/* Контейнер профиля */
+.profile-container {
+    background: #3f3f3f;
+    border-radius: 12px;
+    padding: 20px;
+    width: 80%;
+    margin: 120px auto 40px auto;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Заголовок профиля */
+.profile-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Блок информации */
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #4f4f4f;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* Элементы профиля */
+.profile-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    padding: 8px 12px;
+}
+
+/* Метки */
+.label {
+    font-weight: bold;
+    color: #FFEA3C;
+}
+
+/* Значения */
+.value {
+    color: #ffffff;
+}
+
+/* Заголовок секции */
+.section-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #FFEA3C;
+}
+
+/* Список объектов */
+.object-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.object-item {
+    background: #4f4f4f;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 5px auto;
+    width: 90%;
+    font-size: 14px;
+}
