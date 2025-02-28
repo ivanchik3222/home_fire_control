@@ -6,6 +6,19 @@ from io import BytesIO
 
 exel_bp = Blueprint('excel', __name__)
 
+# Обновленный словарь замен ключей
+QUESTION_MAPPING = {
+    "row1": "Степень огнестойкости и класс конструктивной пожарной опасности",
+    "row2": "Состояние систем противопожарной защиты",
+    "row3": "Состояние путей эвакуации",
+    "row4": "Эксплуатация электрических сетей и оборудования",
+    "row5": "Содержание территории и зданий",
+    "row6": "Наличие первичных средств пожаротушения",
+    "row7": "Соблюдение требований к вентиляционным системам",
+    "row8": "Характеристика хранимых веществ и материалов",
+    "row9": "Обеспечение противопожарного водоснабжения"
+}
+
 def get_excel(form_id):
     # Получаем запись из БД
     form = Inspection_form.query.get(form_id)
@@ -15,23 +28,28 @@ def get_excel(form_id):
     # Получаем запись из Inspection_ticket
     ticket = Inspection_ticket.query.filter_by(assigment_id=form.assigment_id).first()
     
-    # Преобразуем JSON-ответы в список
-    json_data = form.answers  # Это словарь {'question1': 'Yes', 'question2': 'No'}
-    data = [{"№": i + 1, "вопрос": q, "ответ": a} for i, (q, a) in enumerate(json_data.items())]
+    # Преобразуем JSON-ответы, отфильтровываем и заменяем ключи
+    json_data = form.answers
+    data = [
+        {"№": i + 1, "вопрос": QUESTION_MAPPING[q], "ответ": a}
+        for i, (q, a) in enumerate(json_data.items())
+        if q in QUESTION_MAPPING
+    ]
+
+    # Получаем значение conclusion
+    conclusion = json_data.get("conclusion", "Нет данных")
 
     # Создаём Excel-файл
     wb = Workbook()
     ws = wb.active
     ws.title = f"Inspection Report {form_id}"
 
-    # Добавляем стили
+    # Стили
     bold_center = Font(bold=True)
     center_align = Alignment(horizontal="center")
     thin_border = Border(left=Side(style="thin"), right=Side(style="thin"), top=Side(style="thin"), bottom=Side(style="thin"))
-    top_bottom_border = Border(top=Side(style="thin"), bottom=Side(style="thin"))  # Только верхняя и нижняя граница
-    no_border = Border()  # Полностью убирает границы
 
-    # Заполняем заголовки
+    # Заголовки для основной таблицы
     headers = ["№", "Вопрос", "Ответ"]
     ws.append(headers)
 
@@ -44,59 +62,47 @@ def get_excel(form_id):
     # Заполняем основную таблицу
     for row_index, row in enumerate(data, start=2):
         ws.append([row["№"], row["вопрос"], row["ответ"]])
-
         for col_index in range(1, 4):
-            cell = ws.cell(row=row_index, column=col_index)
+            ws.cell(row=row_index, column=col_index).border = thin_border
 
-            if row_index == 4:  
-                cell.border = no_border  # Полностью убираем границы
-            else:
-                cell.border = thin_border  # Обычные границы
+    # Вставляем conclusion ВПРАВО (в колонку E)
+    conclusion_col = 5  # Колонка E
+    ws.cell(row=1, column=conclusion_col, value="Заключение").font = bold_center
+    ws.cell(row=1, column=conclusion_col).alignment = center_align
+    ws.cell(row=1, column=conclusion_col).border = thin_border  # Границы для E1
+    ws.cell(row=2, column=conclusion_col, value=conclusion).border = thin_border
 
-    # **Переносим вторую таблицу вправо (начиная с колонки E)**
+    # **Добавляем таблицу Inspection_ticket справа (в колонках G-H)**
     if ticket:
-        start_col = 5  # E-колонка
-        start_row = 1
+        ticket_start_col = 7  # G-колонка
+        ticket_start_row = 1
 
-        # Объединяем заголовок E1:F1
-        ws.merge_cells(start_row=start_row, start_column=start_col, end_row=start_row, end_column=start_col + 1)
-        header_cell = ws.cell(row=start_row, column=start_col, value="Данные о проверке")
-        header_cell.font = bold_center
-        header_cell.alignment = center_align
-        header_cell.border = thin_border
+        # Заголовок таблицы в G1-H1
+        ws.merge_cells(start_row=ticket_start_row, start_column=ticket_start_col, end_row=ticket_start_row, end_column=ticket_start_col + 1)
+        ticket_header_cell = ws.cell(row=ticket_start_row, column=ticket_start_col, value="Данные о проверке")
+        ticket_header_cell.font = bold_center
+        ticket_header_cell.alignment = center_align
+        ticket_header_cell.border = thin_border
 
-        # Данные второй таблицы
+        # Данные Inspection_ticket
         ticket_data = [
             ["Дата проверки", ticket.inspection_date.strftime("%d.%m.%Y") if ticket.inspection_date else "Нет данных"],
             ["Категория жителей", ticket.resident_category or "Нет данных"],
-            ["Количество человек в семье", str(ticket.family_size) or "Нет данных"]
+            ["Количество человек в семье", str(ticket.family_size) if ticket.family_size is not None else "Нет данных"]
         ]
 
-        for row_index, row in enumerate(ticket_data, start=start_row + 1):
-            for col_index, value in enumerate(row, start=start_col):
+        for row_index, row in enumerate(ticket_data, start=ticket_start_row + 1):
+            for col_index, value in enumerate(row, start=ticket_start_col):
                 cell = ws.cell(row=row_index, column=col_index, value=value)
-                cell.border = thin_border  # Границы для всей второй таблицы
+                cell.border = thin_border  # Границы для всех ячеек таблицы
 
-    # **Исправляем границы 7-й строки**
-    if ws.max_row >= 7:
-        for col_index in range(1, 3):  # A и B должны иметь границы
-            cell = ws.cell(row=7, column=col_index)
-            cell.border = thin_border
-        # C (3-я колонка) не должна иметь границ
-        cell_7C = ws.cell(row=7, column=3)
-        cell_7C.border = no_border
-
-    # Автоматическое расширение первого столбца
-    max_width = max(len(str(cell.value)) for cell in ws["A"] if cell.value)  # Самая длинная строка в первом столбце
-    ws.column_dimensions["A"].width = max_width + 2
-
-    # Настраиваем ширину остальных столбцов
-    ws.column_dimensions["B"].width = 30  # Вопрос
-    ws.column_dimensions["C"].width = 20  # Ответ
-
-    # Настроим ширину для второй таблицы
-    ws.column_dimensions["E"].width = 25
-    ws.column_dimensions["F"].width = 20
+    # Автоширина колонок
+    ws.column_dimensions["A"].width = 5
+    ws.column_dimensions["B"].width = 50
+    ws.column_dimensions["C"].width = 20
+    ws.column_dimensions["E"].width = 30  # Ширина колонки заключения
+    ws.column_dimensions["G"].width = 25  # Первая колонка Inspection_ticket
+    ws.column_dimensions["H"].width = 20  # Вторая колонка Inspection_ticket
 
     # Сохраняем в память (не создавая файл на диске)
     file_stream = BytesIO()
