@@ -24,6 +24,8 @@ def load_user(user_id):
     return Admin.query.get(int(user_id))
 
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('admin.admin_panel'))
     if request.method == 'POST':
         full_name = request.form['full_name']
         password = request.form['password']
