@@ -225,6 +225,9 @@ def get_assignments(user_id):
     ]
     return jsonify(objects_list), 200
 
+def profile():
+    pass
+
 # Создание чего-либо
 admin_bp.add_url_rule('/user/create', view_func=create_user, methods=['POST'])
 admin_bp.add_url_rule('/object/create', view_func=create_object, methods=['POST', 'GET'])
@@ -236,6 +239,7 @@ admin_bp.add_url_rule('/user/<int:user_id>/assignments', view_func=assigments_by
 admin_bp.add_url_rule('/assignment/<int:assigment_id>/result', view_func=assigment_result, methods=['GET'])
 admin_bp.add_url_rule('/objects', view_func=get_objects, methods=['GET'])
 admin_bp.add_url_rule('/assignment/<int:user_id>', view_func=get_assignments, methods=['GET'])
+admin_bp.add_url_rule('/profile', view_func=profile, methods=['GET'])
 
 # Изменение
 admin_bp.add_url_rule('/assigment/<int:assigment_id>/edit', view_func=edit_result, methods=['PUT'])

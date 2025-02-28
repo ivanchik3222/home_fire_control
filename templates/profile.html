@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Профиль пользователя</title>
-    <link rel="stylesheet" href="../static/profile.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
     <link href="https://fonts.cdnfonts.com/css/sf-ui-display" rel="stylesheet">
     <style>
         @import url('https://fonts.cdnfonts.com/css/sf-ui-display');
@@ -19,8 +19,8 @@
             <ul class="nav-links">
                 <li><a href="{{ url_for('index') }}">Главная</a></li>
                 <li><a href="/admin/main">Админ</a></li>
-                <li><a href="analytics.html">Аналитика</a></li>
-                <li><a href="map.html">Карты</a></li>
+                <li><a href="/analytics/objects">проверенные работы</a></li>
+                <li><a href="/analytics/map">Карты</a></li>
             </ul>
         </nav>
     </header>
@@ -32,17 +32,17 @@
             <div class="profile-info">
                 <div class="profile-item">
                     <span class="label">ФИО:</span>
-                    <span class="value">{{ user.full_name }}</span>
+                    <span class="value">{{ current_user.full_name }}</span>
                 </div>
                 <div class="profile-item">
                     <span class="label">Выполнено объектов:</span>
-                    <span class="value">{{ user.completed_objects }}</span>
+                    <span class="value">{{ current_user.completed_objects }}</span>
                 </div>
             </div>
 
             <h2 class="section-title">Последние выполненные объекты</h2>
             <ul class="object-list">
-                {% for address in user.last_completed_addresses %}
+                {% for address in current_user.last_completed_addresses %}
                     <li class="object-item">{{ address }}</li>
                 {% else %}
                     <li class="object-item">Нет выполненных объектов.</li>
