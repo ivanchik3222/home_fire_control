@@ -57,7 +57,7 @@ def create_result():
         admin_id = request.json["admin_id"]
 
         result = Inspection_result(assigment_id = assigment_id, fire_risk_level=fire_risk_level, user_id=user_id, admin_id=admin_id)
-
+        print(request.json)
         assigment = Inspection_assigment.query.filter_by(id=assigment_id).first()
         assigment.status = "completed"
 
@@ -115,6 +115,17 @@ def check_list(assigment_id):
     assigment = Inspection_assigment.query.filter_by(id=assigment_id).first()
     return render_template('check_list.html', assigment=assigment)
 
+def profile():
+    if not current_user.is_authenticated:
+        flash('Вы не зарегестррированны', 'danger')
+        return jsonify({"message": "Войдите в аккаунт"}), 401
+
+    last_completed_tasks = Inspection_object.query.all()
+    if len(last_completed_tasks) >=5:
+        last_completed_tasks = last_completed_tasks[:5]
+
+    return render_template('profile_user.html', last_completed_tasks=last_completed_tasks)
+
 inspection_bp.add_url_rule('/ticket/create', view_func=create_ticket, methods=['POST'])
 inspection_bp.add_url_rule('/form/create', view_func=create_form, methods=['POST'])
 inspection_bp.add_url_rule('/result/create', view_func=create_result, methods=['POST'])
@@ -125,3 +136,4 @@ inspection_bp.add_url_rule('/get_notifications', view_func=get_notifications, me
 inspection_bp.add_url_rule('/ticket/form/<int:assigment_id>', view_func=ticket_form, methods=['GET'])
 inspection_bp.add_url_rule('/way_map/<int:assigment_id>', view_func=way_map, methods=['GET'])
 inspection_bp.add_url_rule('/check_list/<int:assigment_id>', view_func=check_list, methods=['GET'])
+inspection_bp.add_url_rule('/profile',view_func=profile, methods=["GET"])
