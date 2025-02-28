@@ -80,7 +80,6 @@ def assigments_by_user_chek(user_id):
     result_json = Inspection_assigment.query.filter_by(user_id=user_id).first()
     return jsonify(result_json)
 
-
 def dashboard():
     user_id = session.get('user_id')  # Получаем ID пользователя из сессии
     if user_id:
