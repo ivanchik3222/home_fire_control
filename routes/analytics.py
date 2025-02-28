@@ -1,6 +1,6 @@
 from flask import Flask, flash, jsonify, redirect, render_template, request, url_for, Blueprint
 from flask_login import current_user
-from db_models import Inspection_assigment, Inspection_form, Inspection_object, db, User, Admin, Analytics, Region_risk_map
+from db_models import Inspection_assigment, Inspection_form, Inspection_object, Inspection_result, db, User, Admin, Analytics, Region_risk_map
 
 
 analytics_bp = Blueprint('analytics', __name__)
@@ -46,6 +46,7 @@ def analitics_map():
 
 
 
+
 def map_data():
     objects = Inspection_object.query.all()
     markers = []
@@ -53,7 +54,7 @@ def map_data():
         # Получаем назначение для объекта
         assigment = Inspection_assigment.query.filter_by(object_id=obj.id).first()
         # Получаем форму проверки, если назначение существует
-        fire_form = Inspection_form.query.filter_by(assigment_id=assigment.id).first() if assigment else None
+        fire_form = Inspection_result.query.filter_by(assigment_id=assigment.id).first() if assigment else None
 
         # Разбиваем строку координат, предполагается формат "lat,lng"
         try:
@@ -64,17 +65,18 @@ def map_data():
             continue  # Если координаты заданы некорректно, пропускаем объект
 
         # Если форма проверки отсутствует или риск не задан – выводим "в процессе проверки"
-        if fire_form is None or fire_form.risk_score is None:
-            score = "в процессе проверки"
+        if fire_form is None or fire_form.fire_risk_level is None:
+            risk_level = "в процессе проверки"
         else:
-            score = fire_form.risk_score
+            risk_level = fire_form.fire_risk_level  # Значения "пожаробезопасно", "средней_опасности", "пожароопасно"
 
         markers.append({
             "lat": lat,
             "lng": lng,
-            "fire_score": score
+            "fire_risk_level": risk_level  # Теперь передаём уровень риска как строку
         })
     return jsonify(markers)
+
 
 
 analytics_bp.add_url_rule('/regions', view_func=get_regions_analytics, methods=['GET'])

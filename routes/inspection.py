@@ -57,7 +57,7 @@ def create_result():
         admin_id = request.json["admin_id"]
 
         result = Inspection_result(assigment_id = assigment_id, fire_risk_level=fire_risk_level, user_id=user_id, admin_id=admin_id)
-
+        print(request.json)
         assigment = Inspection_assigment.query.filter_by(id=assigment_id).first()
         assigment.status = "completed"
 
