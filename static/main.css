@@ -56,7 +56,7 @@ body {
 .hero {
     position: absolute;
     top: 208px; /* Отступ сверху */
-    left: 380px; /* Отступ слева */
+    left: 250px; /* Отступ слева */
     width: 752px;
     height: 324px;
 }
@@ -182,7 +182,7 @@ body {
 /* Изображение здания */
 .building-image {
     width: 100%;
-    height: auto;
+    height: 79%;
 }
 
 
@@ -248,26 +248,26 @@ body {
     left: 0;
     width: 100%;
     height: 894px; /* Высота по макету */
-    background: url("/static/materials/Rectangle 51.png") no-repeat center/cover;
+    background: url("/static/materials/Облачная платформа.png") no-repeat center/cover;
 }
 
 /* Фон облаков */
 .cloud-platform {
     position: absolute;
-    top: 759px; /* Отступ сверху */
+    top: 650px; /* Отступ сверху */
     left: 50%;
     transform: translateX(-50%);
     width: 1900.92px;
     height: 1514px;
     background: url("/static/materials/Облачная платформа 1.png") no-repeat center/cover;
-    z-index: -1; /* Чтобы не перекрывал контент */
+    z-index: -2; /* Чтобы не перекрывал контент */
 }
 
 
 .process-steps {
     position: absolute;
     top: 1427px;
-    left: 50%;
+    left: 40%;
     transform: translateX(-50%);
     display: flex;
     justify-content: space-between;
@@ -445,10 +445,10 @@ body {
 /* Секция преимуществ */
 .advantages {
     position: absolute;
-    top: 2100px; /* Чёткое позиционирование по макету */
+    top: 2000px; /* Чёткое позиционирование по макету */
     left: 0;
     width: 100%;
-    height: 100vh; 
+    height: 150vh; 
     background: url("/static/materials/night-campfire-night 1.png") no-repeat center/cover;
     display: flex;
     flex-direction: column;
@@ -604,16 +604,19 @@ body {
     font-weight: 700;
     color: #363636;
     margin-bottom: 50px;
+    font-family: 'SF UI Display', sans-serif;
+
 }
 
 /* Контейнер участников */
 .team-members {
-    position: relative;
+    position: absolute;
     width: 100%;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 150px 100px; /* Отступы между карточками */
+    left: -10%;
 }
 
 /* Карточка участника */
@@ -648,10 +651,14 @@ body {
     position: absolute;
     top: 80px;
     left: 480px;
+    width: 200px;
+    height: 200px;
+    border: 6px solid #FFD700;
+    border-radius: 10px;
 }
 
 #Artem{
-    font-family: SF UI Display;
+    font-family: 'SF UI Display', sans-serif;
     font-weight: 700;
     font-size: 28px;
     line-height: 33.41px;
@@ -659,11 +666,22 @@ body {
     width: 119;
     height: 66;
     top: 3596.82px;
-    left: 739.5px;    
+    left: 739.5px;  
+}
+
+#Alish{
+    font-family: 'SF UI Display', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 33.41px;
+    letter-spacing: 0%;
+    width: 119;
+    height: 66;
+    top: 3596.82px;
+    left: 739.5px;
 }
 
 .member-designer {
-    transform: rotate(-15deg);
     position: absolute;
     top: 80px;
     left: 1120px;
@@ -672,14 +690,14 @@ body {
 .member-backend-1 {
     transform: rotate(-15deg);
     position: absolute;
-    top: 380px;
+    top: 400px;
     left: 480px;
 }
 
 .member-backend-2 {
-    transform: rotate(25deg);
+    transform: rotate(-25deg);
     position: absolute;
-    top: 380px;
+    top: 400px;
     left: 1120px;
 }
 
