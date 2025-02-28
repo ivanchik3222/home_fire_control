@@ -26,6 +26,7 @@ def create_ticket():
         assigment.status = "in_progress"
 
         db.session.add(ticket)
+        db.session.commit()
 
         return jsonify({"message": "Данные успешно обновлены"}), 200
     
@@ -40,6 +41,7 @@ def create_form():
 
     form = Inspection_form(answers=answers, assigment_id=assigment_id, risk_score=risk_score)
     db.session.add(form)
+    db.session.commit()
 
     return jsonify({"message": "Данные успешно обновлены"}), 200
 
