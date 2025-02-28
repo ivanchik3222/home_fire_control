@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя</title>
+    <link rel="stylesheet" href="../static/profile.css">
+    <link href="https://fonts.cdnfonts.com/css/sf-ui-display" rel="stylesheet">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/sf-ui-display');
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='materials/Frame 13.png') }}" alt="Логотип">
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('index') }}">Главная</a></li>
+                <li><a href="/admin/main">Админ</a></li>
+                <li><a href="analytics.html">Аналитика</a></li>
+                <li><a href="map.html">Карты</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="profile-container">
+            <h1 class="profile-title">Профиль пользователя</h1>
+
+            <div class="profile-info">
+                <div class="profile-item">
+                    <span class="label">ФИО:</span>
+                    <span class="value">{{ user.full_name }}</span>
+                </div>
+                <div class="profile-item">
+                    <span class="label">Выполнено объектов:</span>
+                    <span class="value">{{ user.completed_objects }}</span>
+                </div>
+            </div>
+
+            <h2 class="section-title">Последние выполненные объекты</h2>
+            <ul class="object-list">
+                {% for address in user.last_completed_addresses %}
+                    <li class="object-item">{{ address }}</li>
+                {% else %}
+                    <li class="object-item">Нет выполненных объектов.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </main>
+</body>
+</html>
