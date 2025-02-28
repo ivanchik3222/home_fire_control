@@ -52,7 +52,7 @@ body {
     top: 8px;
     left: 0;
     width: 500px;
-    height: 729px;
+    /* height: 729px;      Верните потом как было*/
     background: #222;
     border-radius: 10px;
     overflow: hidden;

@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/map-1.css">
-    <title>Карта 2ГИС</title>
-
-    <!-- Подключаем Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='map-1.css') }}">
+  <title>Карта 2ГИС</title>
+  <!-- Подключаем Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
-    <!-- Контейнер для карты -->
-    <section class="map-container">
-        <div id="map"></div>
-    </section>
-
-    <!-- Левая панель -->
-    <aside class="sidebar">
-        <div class="sidebar-header">
-            <img src="../static/materials/Въезд_в_Петропавловск.jpg" alt="Фон панели">
-        </div>
-
+  <!-- Контейнер для карты -->
+  <section class="map-container">
+      <div id="map" style="width: 100%; height: 500px;"></div>
+  </section>
+  
+  <!-- Левая панель с FAQ и фильтром для карты -->
+  <aside class="sidebar">
+      <div class="sidebar-header">
+          <img src="{{ url_for('static', filename='materials/Въезд_в_Петропавловск.jpg') }}" alt="Фон панели">
+      </div>
+      
+      <!-- Список FAQ вопросов -->
         <ul class="faq-list">
             <li class="faq-item">
                 <button class="faq-question">
@@ -67,10 +67,17 @@
                 <div class="faq-answer">Принимаем оплату картами Visa/Mastercard, наличными и через Kaspi.</div>
             </li>
         </ul>
-    </aside>
 
-    <!-- Подключаем Leaflet и кастомный JS -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="../static/map-1.js"></script>
+      <!-- Фильтр для объектов на карте по fire_score -->
+      <div class="map-filter">
+        <label for="filter-switch" style="color: white;">Показать только объекты в процессе проверки</label>
+        <input type="checkbox" id="filter-switch">
+    </div>
+  </aside>
+
+  <!-- Подключаем Leaflet -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Подключаем внешний скрипт -->
+  <script src="{{ url_for('static', filename='map-1.js') }}"></script>
 </body>
 </html>
