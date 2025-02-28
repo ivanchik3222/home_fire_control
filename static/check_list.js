@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return response.json();
         })
         .then(result => {
-            alert('Данные успешно отправлены!');
+            // alert('Данные успешно отправлены!');
             window.location.href = '/inspection/dashboard'
         })
         .catch(error => {
